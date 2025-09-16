@@ -14,24 +14,26 @@ const listVariants = {
 
 const features = [
   { name: "SALE'S CRM", link: "/crm-feature-section" },
-  { name: "CORE ERP", link: "/erp" },
+  { name: "CORE ERP", link: "/erp-feature-section" },
   { name: "Payroll Management", link: "/payroll-management" },
   { name: "Inventory Management", link: "/inventory-management" },
   { name: "Project Management", link: "/product-management" },
   { name: "Production", link: "/production" },
   { name: "Process Management", link: "/process-management" },
-  { name: "Service and complaint", link: "/sevice-and-complaint" },
-  { name: "AMC & CMC", link: "/amc-cmc" },
-  {name:"Accounting",link:"/accounting"},
+  { name: "Menufecture Management ", link: "/menufecturing-management" },
+  { name: "AMC & CMC", link: "/cloud-solutions" },
+  {name:"Accounting",link:"/account-management"},
 ];
 
 const Erp = () => {
   return (
     <div className="overflow-hidden">
-      {/* Hero Section */}
+  
       <section className="relative bg-gradient-to-br from-blue-50 via-blue-100 to-white">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 px-6 py-20">
-          {/* Left Content */}
+          
+
+
           <Motion.div
             initial={{ x: -80, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -50,7 +52,6 @@ const Erp = () => {
             </p>
           </Motion.div>
 
-          {/* Right Image */}
           <Motion.div
             initial={{ x: 80, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -65,7 +66,7 @@ const Erp = () => {
           </Motion.div>
         </div>
 
-        {/* Curved Divider */}
+        
         <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
           <svg
             className="relative block w-full h-16 text-blue-700"
@@ -80,10 +81,10 @@ const Erp = () => {
         </div>
       </section>
 
-      {/* Features Section */}
+      
       <section className="bg-blue-100 py-20">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 px-6">
-          {/* Left - Challenges */}
+      
           <Motion.div
             initial={{ opacity: 0, rotate: -2, y: 40 }}
             whileInView={{ opacity: 1, rotate: 0, y: 0 }}
@@ -119,8 +120,7 @@ const Erp = () => {
             </ul>
           </Motion.div>
 
-          {/* Right - Features */}
-          <Motion.div
+                  <Motion.div
             initial={{ opacity: 0, rotate: 2, y: 40 }}
             whileInView={{ opacity: 1, rotate: 0, y: 0 }}
             viewport={{ once: true }}
@@ -242,7 +242,6 @@ const Erp = () => {
   transition={{ type: "spring", stiffness: 120, damping: 12 }}
   className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-10 items-center"
 >
-  {/* Left Side Image */}
   <div className="flex justify-center">
     <img
       src={imgggggg}
@@ -250,8 +249,6 @@ const Erp = () => {
       className="rounded-2xl shadow-xl hover:scale-105 transition-transform duration-500"
     />
   </div>
-
-  {/* Right Side Text */}
   <div className="space-y-6">
     <h2 className="text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent">
       ERP (Enterprise Resource Planning)
@@ -275,7 +272,6 @@ const Erp = () => {
 >
   <div className="w-[85%] min-h-[400px] rounded-2xl bg-white mx-auto my-20 p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 shadow-2xl">
     
-    {/* Card 1 */}
     <div className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-xl p-6 shadow-md hover:shadow-2xl hover:scale-105 transition-transform duration-300 flex flex-col items-center justify-center text-center">
       <h3 className="text-xl font-bold mb-2">Analytics</h3>
       <p className="text-sm opacity-90">
@@ -283,7 +279,6 @@ const Erp = () => {
       </p>
     </div>
 
-    {/* Card 2 */}
     <div className="bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-xl p-6 shadow-md hover:shadow-2xl hover:scale-105 transition-transform duration-300 flex flex-col items-center justify-center text-center">
       <h3 className="text-xl font-bold mb-2">E-Commerce</h3>
       <p className="text-sm opacity-90">
@@ -291,7 +286,6 @@ const Erp = () => {
       </p>
     </div>
 
-    {/* Card 3 */}
     <div className="bg-gradient-to-r from-pink-500 to-red-500 text-white rounded-xl p-6 shadow-md hover:shadow-2xl hover:scale-105 transition-transform duration-300 flex flex-col items-center justify-center text-center">
       <h3 className="text-xl font-bold mb-2">Automation</h3>
       <p className="text-sm opacity-90">
@@ -299,7 +293,6 @@ const Erp = () => {
       </p>
     </div>
 
-    {/* Card 4 */}
     <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white rounded-xl p-6 shadow-md hover:shadow-2xl hover:scale-105 transition-transform duration-300 flex flex-col items-center justify-center text-center">
       <h3 className="text-xl font-bold mb-2">Support</h3>
       <p className="text-sm opacity-90">

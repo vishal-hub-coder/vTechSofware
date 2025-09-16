@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SupportImage from "../assets/saleImage.jpg"; 
 import { motion, AnimatePresence } from "framer-motion";
 import { FaChevronDown } from "react-icons/fa";
+import {Link} from "react-router-dom";
 
 const tilesData = [
   {
@@ -68,7 +69,6 @@ const About = () => {
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 1, ease: "easeOut" }}
     >
-      {/* Section Heading */}
       <div className="text-center mb-10">
         <h2 className="text-4xl font-bold text-gray-800 relative inline-block">
           Industries
@@ -76,7 +76,6 @@ const About = () => {
         </h2>
       </div>
 
-      {/* Accordion Tiles */}
       <div className="max-w-4xl mx-auto space-y-4">
         {tilesData.map((tile, index) => {
           const isActive = activeIndex === index;
@@ -89,7 +88,7 @@ const About = () => {
               }`}
               onClick={() => toggleTile(index)}
             >
-              {/* Tile Header */}
+             
               <div className="flex justify-between items-center px-6 py-4">
                 <h3 className="text-lg font-semibold text-gray-800">{tile.title}</h3>
                 <motion.div
@@ -100,7 +99,6 @@ const About = () => {
                 </motion.div>
               </div>
 
-              {/* Slide Content with Image */}
               <AnimatePresence>
                 {isActive && (
                   <motion.div
@@ -126,8 +124,6 @@ const About = () => {
           );
         })}
       </div>
-
-      {/* Company Section */}
       <div className="text-center mt-16 mb-12">
         <h2 className="text-4xl font-bold text-gray-800 relative inline-block">
           Company
@@ -165,7 +161,7 @@ const About = () => {
           </p>
 
           <button className="bg-gradient-to-r from-blue-500 to-blue-700 px-6 py-3 rounded-lg text-white shadow hover:scale-105 transition">
-            Read More
+           <Link to="/about-company">Read More</Link>
           </button>
         </div>
       </div>

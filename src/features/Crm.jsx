@@ -72,7 +72,7 @@ const Crm = () => {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-10 items-center"
       >
-        {/* LEFT SIDE TEXT */}
+
         <div className="space-y-6">
           <motion.h1
             initial={{ opacity: 0, x: -50 }}
@@ -97,7 +97,6 @@ const Crm = () => {
             increase retention, and boost your sales growth.
           </motion.p>
 
-          {/* Bullet Points */}
           <ul className="space-y-3">
             {[
               "Streamlined customer data management",
@@ -118,7 +117,6 @@ const Crm = () => {
             ))}
           </ul>
 
-          {/* CTA Button */}
           <motion.button
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -130,7 +128,6 @@ const Crm = () => {
           </motion.button>
         </div>
 
-        {/* RIGHT SIDE IMAGE */}
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
@@ -152,7 +149,6 @@ const Crm = () => {
         </motion.div>
       </motion.div>
 
-      {/* CUSTOM CRM DESCRIPTION SECTION */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -192,7 +188,15 @@ const Crm = () => {
         </motion.button>
       </motion.div>
 
-      {/* =====  FLIP CARD SECTION ===== */}
+
+
+
+
+
+
+
+
+{/*============= Flip Cards Sections============ */}
       <motion.section
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -253,7 +257,7 @@ const Crm = () => {
   className="w-full mt-20 bg-white shadow-xl rounded-3xl p-10 md:p-16 border border-gray-100"
 >
   <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-    {/* LEFT SIDE - HEADING + DESCRIPTION */}
+  
     <div className="text-center md:text-left">
       <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
         Benefits of Availing
@@ -266,7 +270,6 @@ const Crm = () => {
       </p>
     </div>
 
-    {/* RIGHT SIDE - BENEFITS WITH ✅ */}
     <div className="space-y-4">
       {[
         "The business can provide a competitive gain over others by adopting unique CRM solutions.",
@@ -313,7 +316,7 @@ const Crm = () => {
   className="w-full mt-20 relative"
 >
   <div className="max-w-6xl mx-auto px-6">
-    {/* HEADING */}
+   
     <motion.h2
       initial={{ opacity: 0, y: -20 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -323,7 +326,6 @@ const Crm = () => {
       Explore Our CRM Solutions
     </motion.h2>
 
-    {/* GRID CARDS */}
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
       {[
         {
@@ -378,7 +380,7 @@ const Crm = () => {
   className="w-full mt-20"
 >
   <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-    {/* LEFT SIDE - IMAGE WITH BIGGER GRADIENT BORDER + GLOW */}
+    
     <motion.div
       initial={{ opacity: 0, x: -30 }}
       whileInView={{ opacity: 1, x: 0 }}
@@ -395,7 +397,6 @@ const Crm = () => {
       </div>
     </motion.div>
 
-    {/* RIGHT SIDE - CONTENT */}
     <motion.div
       initial={{ opacity: 0, x: 30 }}
       whileInView={{ opacity: 1, x: 0 }}
@@ -420,14 +421,11 @@ const Crm = () => {
         for further support, any assistance, maintenance, or upgrade of the CRM software system.
         Feel free to share your CRM requirement with us today to build a lasting relationship with
         clients, enhance the productivity and efficacy of your business, and stay ahead in this
-        tech-savvy competitive industry.
+        tech-savvy competitive indeustry.
       </p>
     </motion.div>
   </div>
 </motion.section>
-
-
-
     </section>
   );
 };

@@ -11,10 +11,9 @@ import logo from "../assets/logo.jpeg";
 const Footer = () => {
   return (
     <footer className="bg-[#1c1f26] text-gray-300 py-12">
-      {/* Main Footer Grid */}
+     
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
         
-        {/* Column 1: Logo & Contact Info */}
         <div className="space-y-4">
           <Link to="/">
             <img
@@ -28,14 +27,13 @@ const Footer = () => {
             Syndicate Enclave, Raghu, Dabri, New Delhi South West 110045
           </p>
           <p className="text-sm">
-            <span className="font-bold">Phone:</span> +91 0000000000
+            <span className="font-bold">Phone:</span> +91 9910680809
           </p>
           <p className="text-sm">
             <span className="font-bold">Email:</span> info@sapeagleerp.com
           </p>
         </div>
 
-        {/* Column 2: Core Services */}
         <div>
           <h3 className="text-lg font-semibold text-white mb-4">
             Core Services
@@ -52,7 +50,7 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link to="/manufecturing" className="hover:text-white transition">
+              <Link to="/menufecturing-management" className="hover:text-white transition">
                 › Manufacturing
               </Link>
             </li>
@@ -64,7 +62,6 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Column 3: Additional Services */}
         <div>
           <h3 className="text-lg font-semibold text-white mb-4">
             Additional Services
@@ -98,7 +95,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Column 4: Follow Us */}
+      
         <div>
           <h3 className="text-lg font-semibold text-white mb-3">Follow Us</h3>
           <p className="text-xs text-gray-400 mb-4">
@@ -107,25 +104,25 @@ const Footer = () => {
           </p>
           <div className="flex gap-4">
             <a
-              href="#"
+              href="https://x.com/sapeangleerp"
               className="border border-gray-500 rounded-full p-2 hover:bg-gray-700 transition"
             >
               <FaXTwitter />
             </a>
             <a
-              href="#"
+              href="https://www.facebook.com/sapeangleerp"
               className="border border-gray-500 rounded-full p-2 hover:bg-gray-700 transition"
             >
               <FaFacebookF />
             </a>
             <a
-              href="#"
+              href="https://www.instagram..com/sapeangleerp"
               className="border border-gray-500 rounded-full p-2 hover:bg-gray-700 transition"
             >
               <FaInstagram />
             </a>
             <a
-              href="#"
+              href="https://www.linkedin.com/in/sapeangleerp-498493383"
               className="border border-gray-500 rounded-full p-2 hover:bg-gray-700 transition"
             >
               <FaLinkedinIn />

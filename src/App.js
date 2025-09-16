@@ -20,6 +20,10 @@ import { ToastContainer } from "react-toastify";
 import SupportPage from "./pages/SupportPage";
 import CustomerPage from "./pages/CustomerPage";
 import Manufecturing from "./features/Manufecturing";
+import ProductionPage from "./features/ProductionPage";
+import ProcessManagementPage from "./features/ProcessManagementPage";
+import ProjectManageMent from "./features/ProjectManageMent";
+import AboutCompany from "./pages/AboutCompany";
 
 
 
@@ -53,10 +57,14 @@ const App = () => {
           <Route path="/inventory-management" element={<InventoryManagement/>}/>
           <Route path="/account-management" element={<AccountingManagement/>}/>
           <Route path="/menufecturing-management" element={<Manufecturing/>}/>
+          <Route path="/production" element={<ProductionPage/>}/>
+          <Route path="/process-management" element={<ProcessManagementPage/>}/>
+          <Route path="/project-management" element={<ProjectManageMent/>}/>
           <Route path="/pricing" element={<PricingPage/>}/>
           <Route path="/book-demo-section" element={<BookDemo/>}/>
           <Route path="/support" element={<SupportPage/>}/>
           <Route path="/customers" element={<CustomerPage/>}/>
+          <Route path="/about-company" element={<AboutCompany/>}/>
           <Route path="*" element={<h1>Page Not Found</h1>} />
         </Route>
       </Routes>

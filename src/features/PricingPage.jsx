@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { FiChevronDown, FiChevronUp } from "react-icons/fi"; // Icons for Read More toggle
+import { motion } from "framer-motion";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 const plans = [
   {
@@ -20,7 +20,8 @@ const plans = [
       "Salary Reports",
       "Leave apply",
       "Hiring Creation",
-      "Salary Create","Leave Section",
+      "Salary Create",
+      "Leave Section",
       "Company Setup",
       "Create Employee",
       "Create Product",
@@ -30,41 +31,40 @@ const plans = [
       "Complain Assign",
       "Complain Report",
       "Create Customer",
-      'Quotation',
+      "Quotation",
       "Generate Order",
       "Generate Purchase",
       "Generate Performa",
       "Generate Text Invoice",
-      "Generte Contract",
+      "Generate Contract",
       "Generate Requisition",
       "Create Project",
-      "Start Prodution",
+      "Start Production",
       "Customer Payment",
       "Supplier Payment",
       "Bank Account Section",
       "Profit and Loss",
-      'Balance Sheet',
+      "Balance Sheet",
       "All Ledger Report",
-      "Inventory Summery",
+      "Inventory Summary",
       "GST Report",
-      "LMS Summery",
-      "Order Summery",
-      'Purchase Summery',
-      "Payment Summery ",
-      "WhatsApp Summery",
-      "Email Summery",
-      "SMS Summery",
+      "LMS Summary",
+      "Order Summary",
+      "Purchase Summary",
+      "Payment Summary",
+      "WhatsApp Summary",
+      "Email Summary",
+      "SMS Summary",
       "Website API",
       "IndiaMart API",
-        "TradeIndia API",
-        "Just Dial API",
-        "Facebook API",
-        "Exporter India API",
-        "WhatsApp API",
-        "Email API",
-        "SMS APi",
-        "All Module Training"
-
+      "TradeIndia API",
+      "Just Dial API",
+      "Facebook API",
+      "Exporter India API",
+      "WhatsApp API",
+      "Email API",
+      "SMS API",
+      "All Module Training",
     ],
   },
   {
@@ -82,6 +82,46 @@ const plans = [
       "Profile Setup",
       "Password Creation",
       "Salary Reports",
+      "Leave Apply",
+      "Hiring Creation",
+      "Salary Create",
+      "Leave Section",
+      "Company Setup",
+      "Create Employee",
+      "Create Products",
+      "Lead Setup",
+      "Window Setup",
+      "Generate Complain",
+      "Complain Assign",
+      "Complain Report",
+      "Create Customers",
+      "Quotations",
+      "Generate Order",
+      "Generate Purchase",
+      "Generate Performa",
+      "Generate Text Invoice",
+      "Generate Contract",
+      "Generate Requisition",
+      "Create Project",
+      "Start Production",
+      "Customers Payment",
+      "Supplier Payment",
+      "Bank Account Section",
+      "Profit and Loss",
+      "Balance Sheet",
+      "All Ledger Report",
+      "Inventory Summary",
+      "GST Report",
+      "LMS Summary",
+      "Order Summary",
+      "Purchase Summary",
+      "Payment Summary",
+      "WhatsApp Summary",
+      "Email Summary",
+      "SMS Summary",
+      "Website API",
+      "Email API",
+      "All Module Summary",
     ],
   },
   {
@@ -99,6 +139,46 @@ const plans = [
       "Profile Setup",
       "Password Creation",
       "Salary Reports",
+      "Leave Apply",
+      "Hiring Creation",
+      "Salary Create",
+      "Leave Section",
+      "Company Setup",
+      "Create Employee",
+      "Create Products",
+      "Lead Setup",
+      "Window Setup",
+      "Generate Complain",
+      "Complain Assign",
+      "Complain Report",
+      "Create Customers",
+      "Quotations",
+      "Generate Order",
+      "Generate Purchase",
+      "Generate Performa",
+      "Generate Text Invoice",
+      "Generate Contract",
+      "Generate Requisition",
+      "Create Project",
+      "Start Production",
+      "Customers Payment",
+      "Supplier Payment",
+      "Bank Account Section",
+      "Profit and Loss",
+      "Balance Sheet",
+      "All Ledger Report",
+      "Inventory Summary",
+      "GST Report",
+      "LMS Summary",
+      "Order Summary",
+      "Purchase Summary",
+      "Payment Summary",
+      "WhatsApp Summary",
+      "Email Summary",
+      "SMS Summary",
+      "Website API",
+      "Email API",
+      "All Module Summary",
     ],
   },
   {
@@ -116,6 +196,46 @@ const plans = [
       "Profile Setup",
       "Password Creation",
       "Salary Reports",
+      "Leave Apply",
+      "Hiring Creation",
+      "Salary Create",
+      "Leave Section",
+      "Company Setup",
+      "Create Employee",
+      "Create Products",
+      "Lead Setup",
+      "Window Setup",
+      "Generate Complain",
+      "Complain Assign",
+      "Complain Report",
+      "Create Customers",
+      "Quotations",
+      "Generate Order",
+      "Generate Purchase",
+      "Generate Performa",
+      "Generate Text Invoice",
+      "Generate Contract",
+      "Generate Requisition",
+      "Create Project",
+      "Start Production",
+      "Customers Payment",
+      "Supplier Payment",
+      "Bank Account Section",
+      "Profit and Loss",
+      "Balance Sheet",
+      "All Ledger Report",
+      "Inventory Summary",
+      "GST Report",
+      "LMS Summary",
+      "Order Summary",
+      "Purchase Summary",
+      "Payment Summary",
+      "WhatsApp Summary",
+      "Email Summary",
+      "SMS Summary",
+      "Website API",
+      "Email API",
+      "All Module Summary",
     ],
   },
 ];
@@ -123,7 +243,7 @@ const plans = [
 const PricingPage = () => {
   return (
     <div className="min-h-screen bg-gray-50 py-16 px-4">
-      {/* Headings */}
+     
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">Pricing</h1>
         <p className="text-gray-600 text-xl mb-2">
@@ -137,7 +257,11 @@ const PricingPage = () => {
         </p>
       </div>
 
-      {/* Pricing Cards */}
+
+
+
+
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {plans.map((plan, index) => (
           <PricingCard key={index} plan={plan} delay={index * 0.2} />
@@ -162,27 +286,40 @@ const PricingCard = ({ plan, delay }) => {
       <p className="text-3xl font-extrabold mb-1">{plan.price}</p>
       <p className="text-gray-500 mb-6">{plan.description}</p>
 
-      {/* Features List */}
-      <ul className="mb-4 w-full space-y-2 text-gray-700 max-h-40 overflow-hidden relative">
-        <AnimatePresence>
-          {(expanded ? plan.features : plan.features.slice(0, 5)).map(
-            (feature, i) => (
-              <motion.li
-                key={i}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="flex items-center"
-              >
-                <span className="text-green-500 mr-2">✓</span>
-                {feature}
-              </motion.li>
-            )
-          )}
-        </AnimatePresence>
+
+
+
+
+
+
+
+      <ul
+        className={`mb-4 w-full space-y-2 text-gray-700 transition-all duration-500 ${
+          expanded
+            ? "max-h-[600px] overflow-y-auto"
+            : "max-h-40 overflow-hidden"
+        }`}
+      >
+        {plan.features.map((feature, i) => (
+          <li key={i} className="flex items-center">
+            <span className="text-green-500 mr-2">✓</span>
+            {feature}
+          </li>
+        ))}
       </ul>
 
-      {/* Read More / Hide Button */}
+
+
+
+
+
+
+
+
+
+
+
+
       <button
         onClick={() => setExpanded(!expanded)}
         className="flex items-center justify-center w-full border border-blue-500 text-blue-500 font-semibold py-2 rounded-lg hover:bg-blue-50 transition-colors"
@@ -198,7 +335,6 @@ const PricingCard = ({ plan, delay }) => {
         )}
       </button>
 
-      {/* Buy Now Button */}
       <button className="mt-4 w-full bg-blue-500 text-white font-semibold py-2 rounded-lg hover:bg-blue-600 transition-colors">
         Buy Now
       </button>
