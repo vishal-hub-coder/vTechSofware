@@ -7,9 +7,9 @@ const features = [
   { name: "Project Management", link: "/product-management" },
   { name: "Production", link: "/production" },
   { name: "Process Management", link: "/process-management" },
-  { name: "Service and complaint", link: "/sevice-and-complaint" },
-  { name: "AMC & CMC", link: "/amc-cmc" },
-  { name: "Accounting", link: "/accounting" },
+  { name: "Menufecturing", link: "/menufecturing-management" },
+  { name: "AMC & CMC", link: "/cloud-solutions" },
+  { name: "Accounting", link: "/account-management" },
 ];
 
 export default features;

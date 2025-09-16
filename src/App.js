@@ -19,6 +19,7 @@ import RegisterPage from "./pages/RegisterPage";
 import { ToastContainer } from "react-toastify";
 import SupportPage from "./pages/SupportPage";
 import CustomerPage from "./pages/CustomerPage";
+import Manufecturing from "./features/Manufecturing";
 
 
 
@@ -51,6 +52,7 @@ const App = () => {
           <Route path="/cloud-solutions" element={<AMCManagement/>}/>
           <Route path="/inventory-management" element={<InventoryManagement/>}/>
           <Route path="/account-management" element={<AccountingManagement/>}/>
+          <Route path="/menufecturing-management" element={<Manufecturing/>}/>
           <Route path="/pricing" element={<PricingPage/>}/>
           <Route path="/book-demo-section" element={<BookDemo/>}/>
           <Route path="/support" element={<SupportPage/>}/>
