@@ -1,25 +1,65 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import MainLayout from "./layout/MainLayout";
+import HomePage from "./pages/HomePage";
+import About from "./pages/About";
+import Serverices from "./pages/Serverices";
+import Crm from "./features/Crm";
+import BookDemo from "./pages/BookDemo";
+import Erp from "./features/Erp";
+import SaleManagement from "./features/SaleManagement";
+import PayrollManagement from "./features/PayrollManagement";
+import ServiceManagement from "./features/ServiceManagement";
+import AMCManagement from "./features/AMCManagement";
+import InventoryManagement from "./features/InventoryManagement";
+import AccountingManagement from "./features/AccountingManagement";
+import PricingPage from "./features/PricingPage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import { ToastContainer } from "react-toastify";
+import SupportPage from "./pages/SupportPage";
+import CustomerPage from "./pages/CustomerPage";
 
-function App() {
+
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+       <ToastContainer 
+        position="top-center"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnHover
+        draggable
+        theme="dark"
+      />
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          
+          <Route index element={<HomePage />} />
+          <Route path="/register-page"   element={<RegisterPage/>}/>
+          <Route path="/login" element={<LoginPage/>}/>
+          <Route path="/about" element={<About />} />
+          <Route path="/explore-our-services" element={<Serverices />} />
+          <Route path="/crm-feature-section" element={<Crm />} />
+          <Route path="/erp-feature-section" element={<Erp/>}/>
+          <Route path="/sales-management" element={<SaleManagement/>}/>
+          <Route path="/payroll-management" element={<PayrollManagement/>}/>
+          <Route path="/services-mnagement" element={<ServiceManagement/>}/>
+          <Route path="/cloud-solutions" element={<AMCManagement/>}/>
+          <Route path="/inventory-management" element={<InventoryManagement/>}/>
+          <Route path="/account-management" element={<AccountingManagement/>}/>
+          <Route path="/pricing" element={<PricingPage/>}/>
+          <Route path="/book-demo-section" element={<BookDemo/>}/>
+          <Route path="/support" element={<SupportPage/>}/>
+          <Route path="/customers" element={<CustomerPage/>}/>
+          <Route path="*" element={<h1>Page Not Found</h1>} />
+        </Route>
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
