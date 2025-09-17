@@ -81,7 +81,7 @@ const NavigationSection = () => {
 
         <a
   href="https://sapeagleerp.com/adminlogin.aspx"
-  target="_blank"
+ 
   rel="noopener noreferrer"
   className="flex items-center hover:text-blue-600"
   onClick={toggleMenu}
