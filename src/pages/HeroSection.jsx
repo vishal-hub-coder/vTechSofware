@@ -32,7 +32,7 @@ const HeroSection = () => {
   }, [index, text]);
 
   return (
-    <section className="bg-gradient-to-br from-[#1e3c72] to-[#2a5298] text-white relative overflow-hidden">
+    <section className="bg-gradient-to-br from-[#240303] to-[#96aff5] text-white relative overflow-hidden">
      
       <motion.div
         className="absolute -top-32 -left-32 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"

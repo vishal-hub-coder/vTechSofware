@@ -2,7 +2,7 @@ import { motion as Motion } from "framer-motion";
 import React from "react";
 import features from "../data/features";
 import { Link } from "react-router-dom";
-import saleImage from "../assets/saleImage.jpg";
+import saleImage from "../assets/employeesImge.jpg";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -112,7 +112,7 @@ const PayrollManagement = () => {
              <img
                src={saleImage}
                alt="About SAPEAGLE ERP"
-               className="rounded-3xl shadow-xl max-w-full hover:scale-105 transition-transform duration-500"
+               className="rounded-3xl shadow-xl w-[400px] hover:scale-105 transition-transform duration-500"
              />
            </Motion.div>
      

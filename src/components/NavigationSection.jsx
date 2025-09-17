@@ -74,10 +74,27 @@ const NavigationSection = () => {
               <FaGlobe className="text-gray-700 w-4 h-4" />
             </button>
 
-            <button className="hidden sm:flex items-center text-gray-700 hover:text-blue-600 font-medium transition">
-              <FaUser className="w-4 h-4 mr-1" />
-              <Link to="/login">Login</Link>
-            </button>
+
+
+
+
+
+        <a
+  href="https://sapeagleerp.com/adminlogin.aspx"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="flex items-center hover:text-blue-600"
+  onClick={toggleMenu}
+>
+  <FaUser className="mr-2" /> Login
+</a>
+
+
+
+
+
+
+
 
             <button className="hidden sm:block bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded-lg font-semibold shadow-md transition">
               <Link to="/book-demo-section">Book Demo</Link>

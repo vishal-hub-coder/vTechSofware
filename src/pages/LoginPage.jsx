@@ -23,6 +23,7 @@ const LoginPage = () => {
 
     setTimeout(() => {
       navigate("/");
+      
     }, 1500);
   };
 
