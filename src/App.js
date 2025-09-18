@@ -24,6 +24,7 @@ import ProductionPage from "./features/ProductionPage";
 import ProcessManagementPage from "./features/ProcessManagementPage";
 import ProjectManageMent from "./features/ProjectManageMent";
 import AboutCompany from "./pages/AboutCompany";
+import WhatsAppButton from "./layout/WhatsAppButton";
 
 
 
@@ -68,6 +69,7 @@ const App = () => {
           <Route path="*" element={<h1>Page Not Found</h1>} />
         </Route>
       </Routes>
+      <WhatsAppButton/>
     </Router>
   );
 };
