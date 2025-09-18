@@ -31,7 +31,7 @@ const NavigationSection = () => {
             <Link to="/" className="hover:text-blue-600 transition">
               Products
             </Link>
-            <Link to="/about" className="hover:text-blue-600 transition">
+            <Link to="/industories" className="hover:text-blue-600 transition">
               Industries
             </Link>
             <Link

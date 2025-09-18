@@ -2,7 +2,7 @@ import React from 'react'
 import features from "../data/features";
 import { Link } from "react-router-dom";
 import { motion as Motion } from "framer-motion";
-import servicesImage from "../assets/servicesImage.jpg";
+import servicesImage from "../assets/supporttttttt.png";
 const containerVariants = {
   hidden: { opacity: 0 },
   show: {

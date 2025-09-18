@@ -7,7 +7,7 @@ import Chatbot from "../chatbot/Chatbot";
 const HeroSection = () => {
   const [showChat, setShowChat] = useState(false);
 
-  const text = "Arise Awake and Shop not Till the Goal is Reached";
+  const text = "Arise Awake and stop not Till the Goal is Reached";
   const [displayText, setDisplayText] = useState("");
   const [index, setIndex] = useState(0);
 

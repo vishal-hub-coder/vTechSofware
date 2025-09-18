@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SupportImage from "../assets/servicesImage.jpg"; 
+import SupportImage from "../assets/CompanyServices.png"; 
 import elevatorImg from "../assets/elevator.jpg";
 import esclarator from "../assets/eeeeee.jpg";
 import counter from "../assets/counter.jpg";
