@@ -73,7 +73,7 @@ const NavigationSection = () => {
             <button className="p-2 hover:bg-gray-100 rounded-full transition hidden sm:flex">
               <FaGlobe className="text-gray-700 w-4 h-4" />
             </button>
-
+ 
 
 
 
