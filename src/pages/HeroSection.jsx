@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image1 from "../assets/hero-img.png";
-import { FaComments } from "react-icons/fa";
-import Chatbot from "../chatbot/Chatbot";
+// import { FaComments } from "react-icons/fa";
+// import Chatbot from "../chatbot/Chatbot";
 
 const HeroSection = () => {
   const [showChat, setShowChat] = useState(false);
@@ -88,7 +88,7 @@ const HeroSection = () => {
           />
         </motion.div>
       </div>
-
+{/* 
       <motion.button
         onClick={() => setShowChat(!showChat)}
         className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-xl"
@@ -98,9 +98,9 @@ const HeroSection = () => {
         whileHover={{ scale: 1.1 }}
       >
         <FaComments className="w-6 h-6" />
-      </motion.button>
+      </motion.button> */}
 
-      {showChat && <Chatbot />}
+      {/* {showChat && <Chatbot />} */}
     </section>
   );
 };
