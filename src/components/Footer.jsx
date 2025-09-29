@@ -103,25 +103,25 @@ const Footer = () => {
             straight to your feed
           </p>
           <div className="flex gap-4">
-            <a
+            <a target="_blank"
               href="https://x.com/sapeangleerp"
               className="border border-gray-500 rounded-full p-2 hover:bg-gray-700 transition"
             >
               <FaXTwitter />
             </a>
-            <a
+            <a target="_blank"
               href="https://www.facebook.com/sapeangleerp"
               className="border border-gray-500 rounded-full p-2 hover:bg-gray-700 transition"
             >
               <FaFacebookF />
             </a>
-            <a
+            <a  target="_blank"
               href="https://www.instagram..com/sapeangleerp"
               className="border border-gray-500 rounded-full p-2 hover:bg-gray-700 transition"
             >
               <FaInstagram />
             </a>
-            <a
+            <a target="_blank"
               href="https://www.linkedin.com/in/sapeangleerp-498493383"
               className="border border-gray-500 rounded-full p-2 hover:bg-gray-700 transition"
             >

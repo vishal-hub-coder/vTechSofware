@@ -57,35 +57,61 @@ const BookDemo = () => {
   const [openSector, setOpenSector] = useState(false);
   const [openIndustry, setOpenIndustry] = useState(false);
 
+  const [name, setName] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [contact, setContact] = useState("");
+  const [email, setEmail] = useState("");
+  const [budget, setBudget] = useState("");
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const [name , setName] = useState("");
-  const [companyName , setCompanyName] = useState("");
-  const [contact , setContact] = useState("");
-  const [email,setEmail] = useState("");
+    const payload = {
+      companyName,
+      budget,
+      mobile: contact,
+      altMobile: "",
+      name,
+      email,
+      address: "",
+      remarks: "",
+      comId: "78",
+    };
 
-    const handleSubmit = async(e)=>{
-      e.preventDefault();
+    try {
+      const res = await axios.post(
+        "https://api.sapeagleerp.com/api/Customer/save",
+        payload,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "key": "a9f8e7d6c5b4a3f2981e7c5d4b3a2f6e", 
+          },
+        }
+      );
 
-      try{
-        const res = await axios.post("http://localhost:5000/api/bookdemo",{
-          name,companyName,contact,email,sector:selectedSector,industry: selectedIndustry
-        });
-        alert(res.data.message);
+      if (res.data.status === "Success") {
+        alert(`Success! Inserted ID: ${res.data.insertedId}`);
+        // Reset form
         setName("");
         setCompanyName("");
         setContact("");
         setEmail("");
-
-      }catch(error){
-          alert(error.response?.data?.message || "Something went wrong");
+        setBudget("");
+        setSelectedSector("");
+        setSelectedIndustry("");
+      } else {
+        alert("Something went wrong with API.");
       }
+    } catch (error) {
+      alert(error.response?.data?.message || "API request failed");
     }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-blue-200 to-blue-300 p-6">
       <div className="max-w-6xl w-full grid md:grid-cols-2 bg-white/30 backdrop-blur-lg rounded-3xl shadow-2xl overflow-hidden border border-white/40">
-        
+
         {/* LEFT SECTION */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -95,7 +121,7 @@ const BookDemo = () => {
         >
           <h3 className="text-green-300 text-sm mb-3">Sign up for a demo</h3>
           <h1 className="text-4xl font-extrabold leading-snug mb-6">
-           SAPEAGLE ERP <br /> PVT LTD
+            SAPEAGLE ERP <br /> PVT LTD
           </h1>
 
           <div className="space-y-5 text-gray-200">
@@ -144,31 +170,43 @@ const BookDemo = () => {
               type="text"
               placeholder="Your Name"
               value={name}
-              onChange={(e)=>setName(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
               className="w-full border border-gray-300 rounded-xl p-3 bg-white/60 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
+              required
             />
             <motion.input
               whileFocus={{ scale: 1.02 }}
               type="text"
               placeholder="Company Name"
               value={companyName}
-              onChange={(e)=>  setCompanyName(e.target.value)}
+              onChange={(e) => setCompanyName(e.target.value)}
               className="w-full border border-gray-300 rounded-xl p-3 bg-white/60 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
+              required
             />
             <motion.input
               whileFocus={{ scale: 1.02 }}
               type="number"
-              value={contact}
-              onChange={(e)=> setContact(e.target.value)}
               placeholder="Contact Number"
+              value={contact}
+              onChange={(e) => setContact(e.target.value)}
               className="w-full border border-gray-300 rounded-xl p-3 bg-white/60 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
+              required
             />
             <motion.input
               whileFocus={{ scale: 1.02 }}
               type="email"
-              value={email}
-              onChange={(e)=>     setEmail(e.target.value)}
               placeholder="Email Address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full border border-gray-300 rounded-xl p-3 bg-white/60 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
+              required
+            />
+            <motion.input
+              whileFocus={{ scale: 1.02 }}
+              type="text"
+              placeholder="Budget"
+              value={budget}
+              onChange={(e) => setBudget(e.target.value)}
               className="w-full border border-gray-300 rounded-xl p-3 bg-white/60 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
             />
 
