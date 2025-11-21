@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const plans = [
   {
@@ -240,10 +240,54 @@ const plans = [
   },
 ];
 
+// Selected features for checkmark
+const planFeatureCheck = {
+  "Basic Plan": [
+    "LMS Dashboard",
+    "Orders Dashboard",
+    "Profile Setup",
+    "Generate Purchase",
+    "LMS Summary",
+    "Company Setup",
+    "Create Employee",
+    "Create Product",
+    "Lead Setup",
+    "Create Customer",
+    "Quotation",
+    "Generate Order",
+    "Website API",
+    "IndiaMart API",
+    "TradeIndia API",
+    "Just Dial API",
+    "Facebook API",
+    "Exporter India API",
+    "WhatsApp API",
+    "Email API",
+    "SMS API",
+    "All Module Training",
+  ],
+  "Standard Plan": plans[1].features.filter(
+    (f) =>
+      ![
+        "Project Dashboard",
+        "Service Dashboard",
+        "Production Dashboard",
+        "HR",
+        "Purchase",
+        "Text Invoice",
+        "Performa",
+        "Account's Dashboard",
+      ].includes(f)
+  ),
+  "Business Plan": plans[2].features.filter(
+    (f) => !["Create Products", "Create Project"].includes(f)
+  ),
+  "Premium Plan": plans[3].features,
+};
+
 const PricingPage = () => {
   return (
     <div className="min-h-screen bg-gray-50 py-16 px-4">
-     
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">Pricing</h1>
         <p className="text-gray-600 text-xl mb-2">
@@ -256,11 +300,6 @@ const PricingPage = () => {
           ✓ Upgrade Your Plan Anytime &nbsp; ✓ Flexible free trial
         </p>
       </div>
-
-
-
-
-
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {plans.map((plan, index) => (
@@ -286,57 +325,37 @@ const PricingCard = ({ plan, delay }) => {
       <p className="text-3xl font-extrabold mb-1">{plan.price}</p>
       <p className="text-gray-500 mb-6">{plan.description}</p>
 
-
-
-
-
-
-
-
       <ul
         className={`mb-4 w-full space-y-2 text-gray-700 transition-all duration-500 ${
-          expanded
-            ? "max-h-[600px] overflow-y-auto"
-            : "max-h-40 overflow-hidden"
+          expanded ? "max-h-[600px] overflow-y-auto" : "max-h-40 overflow-hidden"
         }`}
       >
         {plan.features.map((feature, i) => (
           <li key={i} className="flex items-center">
-            <span className="text-green-500 mr-2">✓</span>
+            <span
+              className={`mr-2 ${
+                planFeatureCheck[plan.name].includes(feature)
+                  ? "text-green-500"
+                  : "text-red-500"
+              }`}
+            >
+              {planFeatureCheck[plan.name].includes(feature) ? "✓" : "✗"}
+            </span>
             {feature}
           </li>
         ))}
       </ul>
 
-
-
-
-
-
-
-
-
-
-
-
-
       <button
         onClick={() => setExpanded(!expanded)}
         className="flex items-center justify-center w-full border border-blue-500 text-blue-500 font-semibold py-2 rounded-lg hover:bg-blue-50 transition-colors"
       >
-        {expanded ? (
-          <>
-            Hide <FiChevronUp className="ml-2" />
-          </>
-        ) : (
-          <>
-            Read More <FiChevronDown className="ml-2" />
-          </>
-        )}
+        {expanded ? "Hide" : "Read More"}
       </button>
 
       <button className="mt-4 w-full bg-blue-500 text-white font-semibold py-2 rounded-lg hover:bg-blue-600 transition-colors">
-        Buy Now
+       <Link to={`/book-demo-section`}>Buy Now</Link>
+        
       </button>
     </motion.div>
   );
