@@ -42,23 +42,44 @@ const Footer = () => {
           </h3>
           <ul className="space-y-3 text-sm">
             <li>
-              <Link to="/crm-feature-section" className="hover:text-white transition">
+              <Link
+                to="/crm-feature-section"
+                className="hover:text-white transition"
+              >
                 › CRM
               </Link>
             </li>
             <li>
-              <Link to="/erp-feature-section" className="hover:text-white transition">
+              <Link
+                to="/erp-feature-section"
+                className="hover:text-white transition"
+              >
                 › ERP
               </Link>
             </li>
             <li>
-              <Link to="/menufecturing-management" className="hover:text-white transition">
+              <Link
+                to="/menufecturing-management"
+                className="hover:text-white transition"
+              >
                 › Manufacturing
               </Link>
             </li>
             <li>
-              <Link to="/sales-management" className="hover:text-white transition">
+              <Link
+                to="/sales-management"
+                className="hover:text-white transition"
+              >
                 › Sales Management
+              </Link>
+            </li>
+            {/* Add Blog Button */}
+            <li>
+              <Link
+                to="/add-blog"
+                className="inline-block mt-2 bg-blue-500 text-white font-semibold px-4 py-1 rounded-md hover:bg-green-500 transition"
+              >
+                Add Blog
               </Link>
             </li>
           </ul>
@@ -71,27 +92,42 @@ const Footer = () => {
           </h3>
           <ul className="space-y-3 text-sm">
             <li>
-              <Link to="/payroll-management" className="hover:text-white transition">
+              <Link
+                to="/payroll-management"
+                className="hover:text-white transition"
+              >
                 › Payroll Management
               </Link>
             </li>
             <li>
-              <Link to="/services-mnagement" className="hover:text-white transition">
+              <Link
+                to="/services-mnagement"
+                className="hover:text-white transition"
+              >
                 › Service Management
               </Link>
             </li>
             <li>
-              <Link to="/cloud-solutions" className="hover:text-white transition">
+              <Link
+                to="/cloud-solutions"
+                className="hover:text-white transition"
+              >
                 › AMC Management
               </Link>
             </li>
             <li>
-              <Link to="/inventory-management" className="hover:text-white transition">
+              <Link
+                to="/inventory-management"
+                className="hover:text-white transition"
+              >
                 › Inventory Management
               </Link>
             </li>
             <li>
-              <Link to="/account-management" className="hover:text-white transition">
+              <Link
+                to="/account-management"
+                className="hover:text-white transition"
+              >
                 › Accounting
               </Link>
             </li>
@@ -108,21 +144,21 @@ const Footer = () => {
           <div className="flex gap-4 mb-6">
             <a
               target="_blank"
-              href="https://x.com/sapeangleerp"
+              href="https://x.com/sapeagleerp"
               className="border border-gray-500 rounded-full p-2 hover:bg-gray-700 transition"
             >
               <FaXTwitter />
             </a>
             <a
               target="_blank"
-              href="https://www.facebook.com/sapeangleerp"
+              href="https://www.facebook.com/sapeagle.erp"
               className="border border-gray-500 rounded-full p-2 hover:bg-gray-700 transition"
             >
               <FaFacebookF />
             </a>
             <a
               target="_blank"
-              href="https://www.instagram.com/sapeangleerp"
+              href="https://www.instagram.com/sapeagleerp/"
               className="border border-gray-500 rounded-full p-2 hover:bg-gray-700 transition"
             >
               <FaInstagram />
@@ -136,22 +172,22 @@ const Footer = () => {
             </a>
           </div>
 
-         
-       <Link
-  to={LOGIN_API}
-  className="inline-block bg-blue-500 text-[#1c1f26] font-semibold px-7 py-2 rounded-md hover:bg-green-500 transition"
->
-  New Login
-</Link>
-
+          <Link
+            to={LOGIN_API}
+            className="inline-block bg-blue-500 text-[#1c1f26] font-semibold px-7 py-2 rounded-md hover:bg-green-500 transition"
+          >
+            New Login
+          </Link>
         </div>
       </div>
 
       {/* Bottom Copyright */}
-      <div className="border-t border-gray-700 mt-10 pt-4 text-center text-xs text-gray-400">
-        © {new Date().getFullYear()}{" "}
-        <span className="text-white font-semibold">SAPEAGLEERP</span> | All Rights Reserved
-      </div>
+<div className="border-t border-gray-700 mt-10 pt-4 text-center text-xs text-gray-400">
+  © {new Date().getFullYear()}{" "}
+  <span className="text-white font-semibold">SAPEAGLEERP</span> | All
+  Rights Reserved
+</div>
+
     </footer>
   );
 };

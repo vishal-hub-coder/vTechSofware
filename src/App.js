@@ -25,12 +25,17 @@ import ProcessManagementPage from "./features/ProcessManagementPage";
 import ProjectManageMent from "./features/ProjectManageMent";
 import AboutCompany from "./pages/AboutCompany";
 import WhatsAppButton from "./layout/WhatsAppButton";
+import AddBlog from "./pages/AddBlog";
+import ScreenProtect from "./components/screenProtect/ScreenProtect";
+
 
 
 
 const App = () => {
   return (
     <Router>
+      {/* <ScreenProtect /> */}
+      
        <ToastContainer 
         position="top-center"
         autoClose={1500}
@@ -52,6 +57,8 @@ const App = () => {
           <Route path="/crm-feature-section" element={<Crm />} />
           <Route path="/erp-feature-section" element={<Erp/>}/>
           <Route path="/sales-management" element={<SaleManagement/>}/>
+          <Route path="/add-blog" element={<AddBlog />} />
+
           <Route path="/payroll-management" element={<PayrollManagement/>}/>
           <Route path="/services-mnagement" element={<ServiceManagement/>}/>
           <Route path="/cloud-solutions" element={<AMCManagement/>}/>
