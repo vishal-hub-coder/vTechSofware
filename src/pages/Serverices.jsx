@@ -11,6 +11,7 @@ import {
   FaMobileAlt,
 } from "react-icons/fa";
 import { AiFillAppstore } from "react-icons/ai";
+import SEO from "../layout/SEO";
 
 const services = [
   {
@@ -79,6 +80,12 @@ const Serverices = () => {
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 1, ease: "easeOut" }}
     >
+          <SEO
+        title="Home Page - SAPEAGLE ERP"
+        
+        description="Welcome to SAPEAGLE ERP — India's #1 ERP, CRM, HRMS, Accounting & Inventory Management Software."
+        canonical="https://sapeagleerp.com/"
+      />
       {/* Section Title */}
       <div className="text-center mb-14">
         <h1 className="text-4xl font-bold text-gray-900">

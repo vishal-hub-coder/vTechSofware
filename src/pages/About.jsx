@@ -13,6 +13,7 @@ import industory from "../assets/industry.jpg";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaChevronDown } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import SEO from "../layout/SEO";
 
 const tilesData = [
   {
@@ -80,7 +81,12 @@ const About = () => {
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 1, ease: "easeOut" }}
     >
-      
+          <SEO
+        title="Home Page - SAPEAGLE ERP"
+        
+        description="Welcome to SAPEAGLE ERP — India's #1 ERP, CRM, HRMS, Accounting & Inventory Management Software."
+        canonical="https://sapeagleerp.com/"
+      />
       <div className="absolute inset-0 bg-white/80"></div>
 
       <div className="relative z-10">

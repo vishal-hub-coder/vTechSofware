@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import SEO from "../layout/SEO";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
@@ -18,6 +19,12 @@ const RegisterPage = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-200 via-blue-100 to-blue-300 overflow-hidden">
       {/* Floating gradient orbs like LoginPage */}
+          <SEO
+        title="Home Page - SAPEAGLE ERP"
+        
+        description="Welcome to SAPEAGLE ERP — India's #1 ERP, CRM, HRMS, Accounting & Inventory Management Software."
+        canonical="https://sapeagleerp.com/"
+      />
       <motion.div
         className="absolute w-64 h-64 bg-gradient-to-tr from-blue-300 to-blue-600 rounded-full blur-3xl opacity-30 top-10 left-10"
         animate={{ x: [0, 30, -30, 0], y: [0, -30, 30, 0] }}

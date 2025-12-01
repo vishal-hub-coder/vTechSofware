@@ -26,13 +26,14 @@ import ProjectManageMent from "./features/ProjectManageMent";
 import AboutCompany from "./pages/AboutCompany";
 import WhatsAppButton from "./layout/WhatsAppButton";
 import AddBlog from "./pages/AddBlog";
-import ScreenProtect from "./components/screenProtect/ScreenProtect";
-
+// import ScreenProtect from "./components/screenProtect/ScreenProtect";
+import {HelmetProvider } from 'react-helmet-async';
 
 
 
 const App = () => {
   return (
+      <HelmetProvider>
     <Router>
       {/* <ScreenProtect /> */}
       
@@ -78,6 +79,7 @@ const App = () => {
       </Routes>
       <WhatsAppButton/>
     </Router>
+      </HelmetProvider>
   );
 };
 

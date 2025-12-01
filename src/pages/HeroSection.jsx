@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 
 import Image1 from "../assets/hero-img.png";
 import BgImage from "../assets/herosection.png"; 
+import SEO from "../layout/SEO";
 
 const HeroSection = () => {
   const [showChat, setShowChat] = useState(false);
@@ -32,6 +33,12 @@ const HeroSection = () => {
       className="relative text-white overflow-hidden bg-cover bg-center"
       style={{ backgroundImage: `url(${BgImage})` }}
     >
+         <SEO
+        title="Home Page - SAPEAGLE ERP"
+        
+        description="Welcome to SAPEAGLE ERP — India's #1 ERP, CRM, HRMS, Accounting & Inventory Management Software."
+        canonical="https://sapeagleerp.com/"
+      />
       <motion.div
         className="absolute -top-32 -left-32 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"
         animate={{ scale: [1, 1.2, 1], opacity: [0.6, 1, 0.6] }}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import DashboardImage from "../assets/image.png";
+import SEO from "../layout/SEO";
 
 const companies = [
   {
@@ -47,6 +48,12 @@ const CustomerPage = () => {
 
   return (
     <div className="w-full overflow-hidden">
+          <SEO
+        title="Home Page - SAPEAGLE ERP"
+        
+        description="Welcome to SAPEAGLE ERP — India's #1 ERP, CRM, HRMS, Accounting & Inventory Management Software."
+        canonical="https://sapeagleerp.com/"
+      />
       {/* Hero Section */}
       <section
         className="relative h-[80vh] flex items-center justify-center text-center bg-cover bg-center"
