@@ -41,14 +41,14 @@ const industries = [
 ];
 
 const dropdownVariants = {
-  hidden: { opacity: 0, y: -10, scale: 0.95 },
+  hidden: { opacity: 0, x: -10, scale: 0.95 },
   visible: {
     opacity: 1,
-    y: 0,
+    x: 0,
     scale: 1,
     transition: { duration: 0.3, ease: "easeOut" },
   },
-  exit: { opacity: 0, y: -10, scale: 0.95, transition: { duration: 0.2 } },
+  exit: { opacity: 0, x: -10, scale: 0.95, transition: { duration: 0.2 } },
 };
 
 const BookDemo = () => {
@@ -85,14 +85,13 @@ const BookDemo = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            "key": "a9f8e7d6c5b4a3f2981e7c5d4b3a2f6e", 
+            key: "a9f8e7d6c5b4a3f2981e7c5d4b3a2f6e",
           },
         }
       );
 
       if (res.data.status === "Success") {
         alert(`Success! Inserted ID: ${res.data.insertedId}`);
-        // Reset form
         setName("");
         setCompanyName("");
         setContact("");
@@ -109,10 +108,10 @@ const BookDemo = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-blue-200 to-blue-300 p-6">
-      <div className="max-w-6xl w-full grid md:grid-cols-2 bg-white/30 backdrop-blur-lg rounded-3xl shadow-2xl overflow-hidden border border-white/40">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-blue-200 to-blue-300 p-6 overflow-visible">
+      <div className="max-w-6xl w-full grid md:grid-cols-2 bg-white/30 backdrop-blur-lg rounded-3xl shadow-2xl overflow-visible border border-white/40">
 
-        {/* LEFT SECTION */}
+        {/* LEFT PANEL (NO CHANGE) */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -135,83 +134,54 @@ const BookDemo = () => {
             <div className="flex gap-3">
               <span className="text-green-400 text-xl">✨</span>
               <p>
-                <span className="font-semibold">CRM (Customer Relationship Management) is not just software – it's a</span> <br />
-                powerful strategy to manage customer interactions, increase
+                <span className="font-semibold">CRM helps you grow faster</span> <br />
               </p>
             </div>
             <div className="flex gap-3">
               <span className="text-green-400 text-xl">💬</span>
               <p>
                 <span className="font-semibold">5 star customer support</span> <br />
-                Always ready to assist you with questions or issues. Talk to a human.
+                Always ready to assist you.
               </p>
             </div>
           </div>
 
           <div className="bg-yellow-300 text-black rounded-lg p-3 mt-8 text-center font-medium">
-            Trusted by 100+ companies 
+            Trusted by 100+ companies
           </div>
         </motion.div>
 
-        {/* RIGHT SECTION (FORM) */}
+        {/* RIGHT PANEL (FORM) */}
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="p-10 flex flex-col justify-center"
+          className="p-10 flex flex-col justify-center overflow-visible"
         >
           <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
             Book Your Demo
           </h2>
 
           <form className="space-y-5" onSubmit={handleSubmit}>
-            <motion.input
-              whileFocus={{ scale: 1.02 }}
-              type="text"
-              placeholder="Your Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full border border-gray-300 rounded-xl p-3 bg-white/60 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
-              required
-            />
-            <motion.input
-              whileFocus={{ scale: 1.02 }}
-              type="text"
-              placeholder="Company Name"
-              value={companyName}
-              onChange={(e) => setCompanyName(e.target.value)}
-              className="w-full border border-gray-300 rounded-xl p-3 bg-white/60 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
-              required
-            />
-            <motion.input
-              whileFocus={{ scale: 1.02 }}
-              type="number"
-              placeholder="Contact Number"
-              value={contact}
-              onChange={(e) => setContact(e.target.value)}
-              className="w-full border border-gray-300 rounded-xl p-3 bg-white/60 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
-              required
-            />
-            <motion.input
-              whileFocus={{ scale: 1.02 }}
-              type="email"
-              placeholder="Email Address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full border border-gray-300 rounded-xl p-3 bg-white/60 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
-              required
-            />
-            <motion.input
-              whileFocus={{ scale: 1.02 }}
-              type="text"
-              placeholder="Budget"
-              value={budget}
-              onChange={(e) => setBudget(e.target.value)}
-              className="w-full border border-gray-300 rounded-xl p-3 bg-white/60 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
-            />
 
-            {/* Sector Dropdown */}
-            <div className="relative">
+            {/* Inputs */}
+            <motion.input whileFocus={{ scale: 1.02 }} type="text" placeholder="Your Name" value={name}
+              onChange={(e) => setName(e.target.value)} className="w-full border border-gray-300 rounded-xl p-3 bg-white/60" />
+
+            <motion.input whileFocus={{ scale: 1.02 }} type="text" placeholder="Company Name" value={companyName}
+              onChange={(e) => setCompanyName(e.target.value)} className="w-full border border-gray-300 rounded-xl p-3 bg-white/60" />
+
+            <motion.input whileFocus={{ scale: 1.02 }} type="number" placeholder="Contact Number" value={contact}
+              onChange={(e) => setContact(e.target.value)} className="w-full border border-gray-300 rounded-xl p-3 bg-white/60" />
+
+            <motion.input whileFocus={{ scale: 1.02 }} type="email" placeholder="Email Address" value={email}
+              onChange={(e) => setEmail(e.target.value)} className="w-full border border-gray-300 rounded-xl p-3 bg-white/60" />
+
+            <motion.input whileFocus={{ scale: 1.02 }} type="text" placeholder="Budget" value={budget}
+              onChange={(e) => setBudget(e.target.value)} className="w-full border border-gray-300 rounded-xl p-3 bg-white/60" />
+
+            {/* ⭐ LEFT SIDE DROPDOWN (Sector) */}
+            <div className="relative overflow-visible">
               <div
                 onClick={() => setOpenSector(!openSector)}
                 className="cursor-pointer border border-gray-300 rounded-xl p-3 bg-white/60 shadow-sm flex justify-between items-center"
@@ -229,7 +199,11 @@ const BookDemo = () => {
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    className="absolute mt-2 w-full bg-white rounded-xl shadow-xl border border-gray-200 overflow-y-auto max-h-48 z-10"
+                    className="
+                      absolute right-full top-0 mr-4 bg-white rounded-xl 
+                      shadow-2xl border border-gray-200 z-[9999]
+                      w-[300px] max-h-[300px] overflow-auto
+                    "
                   >
                     {sectors.map((item, index) => (
                       <li
@@ -238,7 +212,7 @@ const BookDemo = () => {
                           setSelectedSector(item);
                           setOpenSector(false);
                         }}
-                        className="px-4 py-2 hover:bg-blue-100 cursor-pointer text-gray-700 transition"
+                        className="px-4 py-2 hover:bg-blue-100 cursor-pointer"
                       >
                         {item}
                       </li>
@@ -248,8 +222,8 @@ const BookDemo = () => {
               </AnimatePresence>
             </div>
 
-            {/* Industry Dropdown */}
-            <div className="relative">
+            {/* ⭐ LEFT SIDE DROPDOWN (Industry) */}
+            <div className="relative overflow-visible">
               <div
                 onClick={() => setOpenIndustry(!openIndustry)}
                 className="cursor-pointer border border-gray-300 rounded-xl p-3 bg-white/60 shadow-sm flex justify-between items-center"
@@ -267,7 +241,11 @@ const BookDemo = () => {
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    className="absolute mt-2 w-full bg-white rounded-xl shadow-xl border border-gray-200 overflow-y-auto max-h-48 z-10"
+                    className="
+                      absolute right-full top-0 mr-4 bg-white rounded-xl 
+                      shadow-2xl border border-gray-200 z-[9999]
+                      w-[300px] max-h-[300px] overflow-auto
+                    "
                   >
                     {industries.map((item, index) => (
                       <li
@@ -276,7 +254,7 @@ const BookDemo = () => {
                           setSelectedIndustry(item);
                           setOpenIndustry(false);
                         }}
-                        className="px-4 py-2 hover:bg-blue-100 cursor-pointer text-gray-700 transition"
+                        className="px-4 py-2 hover:bg-blue-100 cursor-pointer"
                       >
                         {item}
                       </li>
@@ -286,11 +264,11 @@ const BookDemo = () => {
               </AnimatePresence>
             </div>
 
+            {/* Submit */}
             <motion.button
               whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.97 }}
               type="submit"
-              className="w-full bg-gradient-to-r from-blue-600 to-blue-800 hover:shadow-xl hover:shadow-blue-400/40 text-white font-bold py-3 rounded-xl shadow-md transition duration-300"
+              className="w-full bg-blue-700 text-white py-3 rounded-xl font-bold shadow-md"
             >
               Submit Request
             </motion.button>
