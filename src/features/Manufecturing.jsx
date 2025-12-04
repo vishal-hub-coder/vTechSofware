@@ -24,8 +24,9 @@ const cardVariants = {
 const Manufecturing = () => {
   return (
     <section className="bg-gradient-to-br from-green-50 via-white to-green-100 py-16">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 px-6 items-center">
- 
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 px-6 items-start">
+
+        {/* Intro Section */}
         <Motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -36,56 +37,23 @@ const Manufecturing = () => {
           <h2 className="text-4xl font-extrabold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
             Manufacturing
           </h2>
-
           <p className="text-lg leading-relaxed text-gray-700">
             Manufacturing is the process of converting raw materials or
-            components into finished goods through the use of tools, machines,
-            labor, and technology.
+            components into finished goods through tools, machines, labor, and technology.
           </p>
-
           <p className="text-lg leading-relaxed text-gray-700">
             It involves a series of steps to produce items at various scales,
-            from small batches to mass production. Our group works with specific
-            corporations to convert identified thoughts into beautiful batches
-            ready for market. Manufacturing plays a vital role in industries
-            such as automotive, electronics, food processing, textiles, and
-            more.
+            from small batches to mass production. Our group works with corporations
+            to transform ideas into market-ready products.
+          </p>
+          <p className="text-lg leading-relaxed text-gray-700">
+            Manufacturing plays a vital role in industries such as automotive,
+            electronics, food processing, textiles, aerospace, pharmaceuticals,
+            and more.
           </p>
         </Motion.div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        {/* Features Cards */}
         <Motion.div
           variants={containerVariants}
           initial="hidden"
@@ -114,11 +82,7 @@ const Manufecturing = () => {
           ))}
         </Motion.div>
 
-
-
-
-
-
+        {/* Main Image */}
         <Motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -133,26 +97,7 @@ const Manufecturing = () => {
           />
         </Motion.div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        {/* Examples Section */}
         <Motion.div
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -162,17 +107,19 @@ const Manufecturing = () => {
           <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-green-600 to-green-800 bg-clip-text text-transparent">
             Examples of Manufacturing
           </h2>
-
           <p className="text-lg leading-relaxed">
-            Manufacturing plays a significant role in the following industries:
+            Manufacturing plays a significant role in many industries:
           </p>
-
           <ul className="space-y-3">
             {[
               "Automotive Industry",
               "Textile Industry",
               "Electronics Industry",
-              "Food Processing",
+              "Aerospace Industry",
+              "Pharmaceutical Industry",
+              "Food Processing Industry",
+              "Construction Materials",
+              "Renewable Energy Equipment",
             ].map((industry, index) => (
               <Motion.li
                 key={index}
@@ -187,6 +134,84 @@ const Manufecturing = () => {
                 <span className="font-semibold">{industry}</span>
               </Motion.li>
             ))}
+          </ul>
+        </Motion.div>
+
+        {/* Deep Content Section */}
+        <Motion.div
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.3, type: "spring", stiffness: 90 }}
+          className="space-y-8 text-gray-700 col-span-2"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-green-700">
+            Manufacturing Processes
+          </h2>
+          <p className="text-lg leading-relaxed">
+            There are several processes used in manufacturing, including:
+          </p>
+          <ul className="list-disc list-inside space-y-2">
+            <li>Casting: Pouring liquid material into molds to solidify.</li>
+            <li>Machining: Cutting and shaping materials into precise forms.</li>
+            <li>Forming: Bending, pressing, or rolling materials into shape.</li>
+            <li>Joining: Welding, soldering, or fastening components together.</li>
+            <li>3D Printing: Layer-by-layer additive manufacturing techniques.</li>
+          </ul>
+
+          <h2 className="text-3xl md:text-4xl font-bold text-green-700">
+            Types of Manufacturing
+          </h2>
+          <p className="text-lg leading-relaxed">
+            Different types of manufacturing include:
+          </p>
+          <ul className="list-disc list-inside space-y-2">
+            <li>Job Production: Custom products for specific clients.</li>
+            <li>Batch Production: Manufacturing a set quantity at a time.</li>
+            <li>Mass Production: Large-scale production using assembly lines.</li>
+            <li>Continuous Production: Non-stop production for high-demand items.</li>
+            <li>Flexible Manufacturing: Systems that can switch between products.</li>
+          </ul>
+
+          <h2 className="text-3xl md:text-4xl font-bold text-green-700">
+            Technologies in Modern Manufacturing
+          </h2>
+          <p className="text-lg leading-relaxed">
+            Modern manufacturing uses advanced technologies such as:
+          </p>
+          <ul className="list-disc list-inside space-y-2">
+            <li>Automation and Robotics</li>
+            <li>Computer-Aided Design (CAD) and Manufacturing (CAM)</li>
+            <li>Internet of Things (IoT) for Smart Factories</li>
+            <li>Artificial Intelligence for Process Optimization</li>
+            <li>3D Printing for Rapid Prototyping</li>
+          </ul>
+
+          <h2 className="text-3xl md:text-4xl font-bold text-green-700">
+            Challenges in Manufacturing
+          </h2>
+          <p className="text-lg leading-relaxed">
+            Manufacturers face several challenges, including:
+          </p>
+          <ul className="list-disc list-inside space-y-2">
+            <li>Supply chain disruptions</li>
+            <li>Rising material and labor costs</li>
+            <li>Maintaining quality at scale</li>
+            <li>Adopting new technologies efficiently</li>
+            <li>Environmental sustainability and waste management</li>
+          </ul>
+
+          <h2 className="text-3xl md:text-4xl font-bold text-green-700">
+            Trends in Manufacturing
+          </h2>
+          <p className="text-lg leading-relaxed">
+            Current trends include:
+          </p>
+          <ul className="list-disc list-inside space-y-2">
+            <li>Green Manufacturing and Eco-friendly Materials</li>
+            <li>Smart Factories with AI and IoT Integration</li>
+            <li>Mass Customization of Products</li>
+            <li>Collaborative Robots (Cobots) working alongside humans</li>
+            <li>Digital Twins for Monitoring and Simulation</li>
           </ul>
         </Motion.div>
       </div>

@@ -103,7 +103,7 @@ const Erp = () => {
                 "Inventory Leading",
                 "Accounting Struggles",
                 "ERP",
-                "Oracle NetSuite",
+                // "Oracle NetSuite",
               ].map((item, i) => (
                 <Motion.li
                   key={i}
@@ -318,24 +318,34 @@ const Erp = () => {
   className="max-w-7xl mx-auto px-6 py-12"
 >
   <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 space-y-6">
+    {/* Company Name */}
     <p className="text-2xl md:text-3xl font-bold text-gray-800 text-center">
-      Monteage <span className="text-red-500">IT Solutions Pvt Ltd</span>
+      Sappeagle <span className="text-green-600">ERP Pvt Ltd</span>
     </p>
 
+    {/* Introduction */}
     <p className="text-lg leading-relaxed text-gray-700">
-      Monteage IT Solutions Pvt Ltd has a strong focus on <span className="font-semibold text-gray-900">professionalism, creativity,</span> and <span className="font-semibold text-gray-900">personalized solutions</span> when it comes to web design and development.
+      Sappeagle ERP Pvt Ltd is dedicated to delivering <span className="font-semibold text-gray-900">innovative, scalable, and intelligent ERP solutions</span> that empower businesses to streamline operations, enhance efficiency, and drive growth in a digital-first world.
     </p>
 
+    {/* Approach */}
     <p className="text-lg leading-relaxed text-gray-700">
-      The company emphasizes the importance of fully planning and time-boxing project plans, ensuring that clients have full access to their project management system for transparency and accountability.
+      Our approach emphasizes <span className="font-semibold text-gray-900">customized solutions, cutting-edge technology, and seamless integration</span>. We collaborate closely with clients to understand their unique business processes, ensuring that our ERP systems align perfectly with their strategic goals.
     </p>
 
+    {/* Expertise */}
     <p className="text-lg leading-relaxed text-gray-700">
-      Their personalized and consultative approach to web design requirements is commendable, as they take the time to understand each client's <span className="font-semibold">brand, values,</span> and <span className="font-semibold">precise business needs</span> before beginning any project.
+      With expertise across multiple industries, we provide solutions that optimize finance, HR, inventory, production, and customer management. Our team focuses on creating a <span className="font-semibold text-gray-900">unified platform</span> that transforms how organizations operate, making decision-making faster, smarter, and data-driven.
     </p>
 
+    {/* Values */}
     <p className="text-lg leading-relaxed text-gray-700">
-      This approach helps create <span className="font-semibold text-gray-900">customized solutions</span> that meet each business's specific needs and goals.
+      At Sappeagle ERP, we pride ourselves on <span className="font-semibold text-gray-900">innovation, reliability, and client-centricity</span>. Our mission is to enable businesses to scale efficiently, reduce operational bottlenecks, and achieve sustainable growth through technology-driven solutions.
+    </p>
+
+    {/* Conclusion */}
+    <p className="text-lg leading-relaxed text-gray-700">
+      By leveraging modern ERP frameworks, intelligent automation, and seamless integrations, Sappeagle ERP Pvt Ltd ensures every client receives a <span className="font-semibold text-gray-900">bespoke system</span> tailored to their exact business requirements, empowering them to stay ahead in today's competitive marketplace.
     </p>
   </div>
 </Motion.div>
