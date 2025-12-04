@@ -28,6 +28,8 @@ import WhatsAppButton from "./layout/WhatsAppButton";
 import AddBlog from "./pages/AddBlog";
 // import ScreenProtect from "./components/screenProtect/ScreenProtect";
 import {HelmetProvider } from 'react-helmet-async';
+import BlogDetail from "./pages/BlogDetail";
+import BlogDetailStandalone from "./pages/BlogDetailStandalone";
 
 
 
@@ -48,6 +50,7 @@ const App = () => {
         theme="dark"
       />
       <Routes>
+        <Route path="/blog/:id" element={<BlogDetailStandalone/>} />
         <Route path="/" element={<MainLayout />}>
           
           <Route index element={<HomePage />} />
@@ -59,7 +62,7 @@ const App = () => {
           <Route path="/erp-feature-section" element={<Erp/>}/>
           <Route path="/sales-management" element={<SaleManagement/>}/>
           <Route path="/add-blog" element={<AddBlog />} />
-
+           <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/payroll-management" element={<PayrollManagement/>}/>
           <Route path="/services-mnagement" element={<ServiceManagement/>}/>
           <Route path="/cloud-solutions" element={<AMCManagement/>}/>
