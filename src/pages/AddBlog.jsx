@@ -5,7 +5,9 @@ const API_BASE = "https://api.metasolution.in/api/News";
 
 const AddBlog = () => {
   const [blogs, setBlogs] = useState([]);
+  const [filteredBlogs, setFilteredBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
 
   // Fetch blogs from API
   const fetchBlogs = async () => {
@@ -13,7 +15,7 @@ const AddBlog = () => {
     try {
       const res = await axios.get(`${API_BASE}/getAll`);
       setBlogs(res.data || []);
-      console.log(res);
+      setFilteredBlogs(res.data || []);
     } catch (err) {
       console.error(err);
     }
@@ -23,6 +25,20 @@ const AddBlog = () => {
   useEffect(() => {
     fetchBlogs();
   }, []);
+
+  // Filter blogs based on search term
+  useEffect(() => {
+    if (searchTerm.trim() === "") {
+      setFilteredBlogs(blogs);
+    } else {
+      const filtered = blogs.filter(
+        (blog) =>
+          blog.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          blog.keywords?.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredBlogs(filtered);
+    }
+  }, [searchTerm, blogs]);
 
   return (
     <div className="w-full bg-gray-50 min-h-screen pb-10">
@@ -34,6 +50,17 @@ const AddBlog = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 mt-10">
+        {/* Search */}
+        <div className="mb-6 flex justify-center">
+          <input
+            type="text"
+            placeholder="Search blogs..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full md:w-1/2 p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+
         {/* Loading */}
         {loading && (
           <div className="flex justify-center items-center h-40">
@@ -42,9 +69,9 @@ const AddBlog = () => {
         )}
 
         {/* Blog Grid */}
-        {!loading && blogs.length > 0 && (
+        {!loading && filteredBlogs.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogs.map((blog) => (
+            {filteredBlogs.map((blog) => (
               <a
                 key={blog.id}
                 href={`/blog/${blog.id}`}
@@ -88,9 +115,9 @@ const AddBlog = () => {
         )}
 
         {/* No Blogs */}
-        {!loading && blogs.length === 0 && (
+        {!loading && filteredBlogs.length === 0 && (
           <p className="text-center text-gray-500 mt-20 text-lg">
-            No blogs available at the moment.
+            No blogs match your search.
           </p>
         )}
       </div>
