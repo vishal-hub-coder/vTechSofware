@@ -23,7 +23,7 @@ const WhatsAppButton = () => {
 
   return (
     <>
-      {/* CALL BUTTON */}
+     
       <motion.a
         href={`tel:${phoneNumber}`}
         className="fixed bottom-6 left-6 bg-blue-600 hover:bg-blue-700 text-white rounded-full p-4 shadow-xl flex items-center justify-center z-50"

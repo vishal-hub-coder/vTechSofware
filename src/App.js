@@ -62,7 +62,8 @@ const App = () => {
           <Route path="/erp-feature-section" element={<Erp/>}/>
           <Route path="/sales-management" element={<SaleManagement/>}/>
           <Route path="/add-blog" element={<AddBlog />} />
-           <Route path="/blog/:id" element={<BlogDetail />} />
+           <Route path="/blog/:id/:slug" element={<BlogDetail />} />
+
           <Route path="/payroll-management" element={<PayrollManagement/>}/>
           <Route path="/services-mnagement" element={<ServiceManagement/>}/>
           <Route path="/cloud-solutions" element={<AMCManagement/>}/>
