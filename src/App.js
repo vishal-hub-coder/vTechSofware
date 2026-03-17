@@ -14,7 +14,7 @@ import AMCManagement from "./features/AMCManagement";
 import InventoryManagement from "./features/InventoryManagement";
 import AccountingManagement from "./features/AccountingManagement";
 import PricingPage from "./features/PricingPage";
-// import LoginPage from "./pages/LoginPage";
+import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import { ToastContainer } from "react-toastify";
 import SupportPage from "./pages/SupportPage";
@@ -30,6 +30,7 @@ import AddBlog from "./pages/AddBlog";
 import {HelmetProvider } from 'react-helmet-async';
 import BlogDetail from "./pages/BlogDetail";
 import BlogDetailStandalone from "./pages/BlogDetailStandalone";
+import Chatbot from "./chatbot/Chatbot";
 
 
 
@@ -55,7 +56,7 @@ const App = () => {
           
           <Route index element={<HomePage />} />
           <Route path="/register-page"   element={<RegisterPage/>}/>
-          {/* <Route path="/login" element={<LoginPage/>}/> */}
+          <Route path="/login" element={<LoginPage/>}/>
           <Route path="/industories" element={<About />} />
           <Route path="/explore-our-services" element={<Serverices />} />
           <Route path="/crm-feature-section" element={<Crm />} />
@@ -78,9 +79,11 @@ const App = () => {
           <Route path="/support" element={<SupportPage/>}/>
           <Route path="/customers" element={<CustomerPage/>}/>
           <Route path="/about-company" element={<AboutCompany/>}/>
+          <Route path="/chat-bot" element={<Chatbot/>}/>
           <Route path="*" element={<h1>Page Not Found</h1>} />
         </Route>
       </Routes>
+      <Chatbot/>
       <WhatsAppButton/>
     </Router>
       </HelmetProvider>
