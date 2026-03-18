@@ -26,6 +26,7 @@ import ProjectManageMent from "./features/ProjectManageMent";
 import AboutCompany from "./pages/AboutCompany";
 import WhatsAppButton from "./layout/WhatsAppButton";
 import AddBlog from "./pages/AddBlog";
+import Payment from "./pages/payment/Payment";
 // import ScreenProtect from "./components/screenProtect/ScreenProtect";
 import {HelmetProvider } from 'react-helmet-async';
 import BlogDetail from "./pages/BlogDetail";
@@ -79,6 +80,7 @@ const App = () => {
           <Route path="/support" element={<SupportPage/>}/>
           <Route path="/customers" element={<CustomerPage/>}/>
           <Route path="/about-company" element={<AboutCompany/>}/>
+          <Route path="/payment" element={<Payment/>}/>
           <Route path="/chat-bot" element={<Chatbot/>}/>
           <Route path="*" element={<h1>Page Not Found</h1>} />
         </Route>

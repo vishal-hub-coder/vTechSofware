@@ -142,9 +142,9 @@ const About = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <SEO
-        title="About Us - SAPEAGLE ERP"
-        description="Discover how SAPEAGLE ERP transforms businesses with integrated solutions for finance, HR, manufacturing, and more."
-        canonical="https://sapeagleerp.com/about"
+        title="About Us - vTechSoftware ERP"
+        description="Discover how vTechSoftware ERP transforms businesses with integrated solutions for finance, HR, manufacturing, and more."
+        
       />
 
       {/* Hero Section */}
@@ -406,7 +406,7 @@ const About = () => {
                 >
                   <img
                     src={SupportImage}
-                    alt="SAPEAGLE ERP Team"
+                    alt="vTechSoftware ERP Team"
                     className="w-full h-[500px] object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
@@ -456,7 +456,7 @@ const About = () => {
                   </span>
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  SAPEAGLE ERP is a comprehensive solution that helps businesses streamline operations, improve efficiency, and make smarter decisions. It integrates all key business functions into a single, unified platform.
+                  vTechSoftware ERP is a comprehensive solution that helps businesses streamline operations, improve efficiency, and make smarter decisions. It integrates all key business functions into a single, unified platform.
                 </p>
               </div>
 
@@ -515,7 +515,7 @@ const About = () => {
               Ready to Transform Your Business?
             </h2>
             <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
-              Join hundreds of businesses already leveraging SAPEAGLE ERP for streamlined operations and growth.
+              Join hundreds of businesses already leveraging vTechSoftware ERP for streamlined operations and growth.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="bg-white text-blue-600 px-10 py-4 rounded-xl font-bold text-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">

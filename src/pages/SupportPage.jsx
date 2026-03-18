@@ -93,17 +93,17 @@ const SupportPage = () => {
   const jsonLD = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "SAPEAGLE ERP - Support Page",
+    "name": "vtech ERP - Support Page",
     "operatingSystem": "Web",
     "applicationCategory": "BusinessApplication",
-    "url": "https://sapeagleerp.com/support",
-    "description": "SAPEAGLE ERP Support — Contact us for help regarding CRM, HRMS, Payroll, Accounting, Inventory & Sales Management software.",
-    "image": "https://sapeagleerp.com/assets/support-og-image.png",
+    "url": "https://vtechsoftwareerp/support",
+    "description": "vtech ERP Support — Contact us for help regarding CRM, HRMS, Payroll, Accounting, Inventory & Sales Management software.",
+    "image": "https://vtechsoftwareerp/assets/support-og-image.png",
     "offers": {
       "@type": "Offer",
       "price": "0.00",
       "priceCurrency": "INR",
-      "url": "https://sapeagleerp.com/book-demo-section"
+      "url": "https://vtechsoftwareerp/book-demo-section"
     }
   };
 
@@ -121,7 +121,7 @@ const SupportPage = () => {
       if (result.isConfirmed) {
         switch (type) {
           case "WhatsApp Support":
-            window.open("https://wa.me/919958790809", "_blank");
+            window.open("https://wa.me/9326870893", "_blank");
             break;
           case "Chat with Experts":
             Swal.fire("Chat Support", "Live chat expert will connect shortly...", "info");
@@ -131,10 +131,8 @@ const SupportPage = () => {
               title: "Choose Email Address",
               html: `
                 <div style="display: flex; flex-direction: column; gap: 12px;">
-                  <button id="mail1" class="swal2-confirm swal2-styled" style="background:#2563eb;">sales@sapeagleerp.com</button>
-                  <button id="mail2" class="swal2-confirm swal2-styled" style="background:#2563eb;">support@sapeagleerp.com</button>
-                  <button id="mail3" class="swal2-confirm swal2-styled" style="background:#2563eb;">admin@sapeagleerp.com</button>
-                  <button id="mail4" class="swal2-confirm swal2-styled" style="background:#2563eb;">info@sapeagleerp.com</button>
+                  <button id="mail1" class="swal2-confirm swal2-styled" style="background:#2563eb;">vtechsoftwarevishal@gmail.com</button>
+
                 </div>
               `,
               showConfirmButton: false,
@@ -143,17 +141,17 @@ const SupportPage = () => {
             });
             setTimeout(() => {
               document.getElementById("mail1").onclick = () =>
-                window.location.href = "mailto:sales@sapeagleerp.com?subject=Support Request&body=Hello Team,";
+                window.location.href = "mailto:vtechsoftwarevishal@gmail.com?subject=Support Request&body=Hello Team,";
               document.getElementById("mail2").onclick = () =>
-                window.location.href = "mailto:support@sapeagleerp.com?subject=Support Request&body=Hello Team,";
+                window.location.href = "mailto:support@vtechsoftwarevishal.com?subject=Support Request&body=Hello Team,";
               document.getElementById("mail3").onclick = () =>
-                window.location.href = "mailto:admin@sapeagleerp.com?subject=Support Request&body=Hello Team,";
+                window.location.href = "mailto:admin@vtechsoftwarevishal.com?subject=Support Request&body=Hello Team,";
               document.getElementById("mail4").onclick = () =>
-                window.location.href = "mailto:info@sapeagleerp.com?subject=Support Request&body=Hello Team,";
+                window.location.href = "mailto:info@vtechsoftwarevishal.com?subject=Support Request&body=Hello Team,";
             }, 200);
             break;
           case "Calling Support":
-            window.location.href = "tel:+919958790809";
+            window.location.href = "tel:+91 9326870893";
             break;
           case "Skype Support":
             window.open("skype:live:.cid.sample1234?call", "_self");
@@ -181,9 +179,9 @@ const SupportPage = () => {
       <SEO
         title="Support - vTech Software Solutions"
         description="Need help? Contact our support team via WhatsApp, Email, Chat, Phone, Skype, Remote Desk or Visit our office."
-        canonical="https://sapeagleerp.com/support"
+      
         keywords="vTech support, ERP software help, CRM software support, HRMS software support"
-        ogImage="https://sapeagleerp.com/logo.jpeg"
+        
         jsonLD={jsonLD}
       />
 

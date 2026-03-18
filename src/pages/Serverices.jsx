@@ -121,9 +121,9 @@ const Serverices = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-50">
       <SEO
-        title="Services - SAPEAGLE ERP"
-        description="Explore SAPEAGLE ERP's comprehensive services including CRM, ERP, Sales, Payroll, Inventory, and more."
-        canonical="https://sapeagleerp.com/services"
+        title="Services - vtech ERP"
+        description="Explore vtech ERP's comprehensive services including CRM, ERP, Sales, Payroll, Inventory, and more."
+        
       />
 
       {/* Hero Section */}
@@ -301,7 +301,7 @@ const Serverices = () => {
                 Ready to Transform Your Business?
               </h2>
               <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
-                Join hundreds of businesses already leveraging SAPEAGLE ERP for streamlined operations and exponential growth.
+                Join hundreds of businesses already leveraging vtech ERP for streamlined operations and exponential growth.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-400 hover:to-purple-400 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">

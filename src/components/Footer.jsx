@@ -18,7 +18,9 @@ import {
 } from "react-icons/fa6";
 import logo from "../assets/vTechSoftware.png";
 
-const LOGIN_API = "https://erp.sapeagleerp.com/login";
+// const LOGIN_API = "https://vtechsoftwareerp.com/login";
+const LOGIN_API = `{}`;
+
 
 const footerLinks = {
   coreServices: [
@@ -38,10 +40,10 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { icon: <FaXTwitter />, href: "https://x.com/sapeagleerp", color: "hover:bg-gray-800" },
-  { icon: <FaFacebookF />, href: "https://www.facebook.com/sapeagle.erp", color: "hover:bg-blue-600" },
-  { icon: <FaInstagram />, href: "https://www.instagram.com/sapeagleerp/", color: "hover:bg-pink-600" },
-  { icon: <FaLinkedinIn />, href: "https://www.linkedin.com/in/sapeangleerp-498493383", color: "hover:bg-blue-700" },
+  { icon: <FaXTwitter />, href: "https://x.com/", color: "hover:bg-gray-800" },
+  { icon: <FaFacebookF />, href: "https://www.facebook.com/", color: "hover:bg-blue-600" },
+  { icon: <FaInstagram />, href: "https://www.instagram.com/", color: "hover:bg-pink-600" },
+  { icon: <FaLinkedinIn />, href: "https://www.linkedin.com/in/", color: "hover:bg-blue-700" },
   { icon: <FaYoutube />, href: "https://youtube.com", color: "hover:bg-red-600" },
 ];
 

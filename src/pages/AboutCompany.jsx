@@ -6,10 +6,10 @@ const AboutCompany = () => {
   return (
     <section className="bg-gradient-to-br from-gray-50 to-blue-50 py-16">
           <SEO
-        title="Home Page - SAPEAGLE ERP"
+        title="Home Page - vTechSoftware ERP"
         
-        description="Welcome to SAPEAGLE ERP — India's #1 ERP, CRM, HRMS, Accounting & Inventory Management Software."
-        canonical="https://sapeagleerp.com/"
+        description="Welcome to vTechSoftware ERP — India's #1 ERP, CRM, HRMS, Accounting & Inventory Management Software."
+        
       />
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
        

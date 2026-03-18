@@ -95,7 +95,7 @@ the process of recording, summarizing, analyzing, and reporting financial transa
              <div className="absolute -top-6 -left-6 w-28 h-28 bg-gradient-to-br from-blue-100 to-blue-300 rounded-full blur-2xl opacity-30" />
              <img
                src={AccountImage}
-               alt="About SAPEAGLE ERP"
+               alt="About vTechSoftware ERP"
                className="rounded-3xl shadow-xl max-w-full hover:scale-105 transition-transform duration-500"
              />
            </Motion.div>

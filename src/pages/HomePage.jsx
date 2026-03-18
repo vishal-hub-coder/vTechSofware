@@ -12,28 +12,28 @@ const HomePage = () => {
   const jsonLD = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "SAPEAGLE ERP",
+    "name": "vtech ERP",
     "operatingSystem": "Web",
     "applicationCategory": "BusinessApplication",
-    "url": "https://sapeagleerp.com/",
+    "url": "https://vtechsoftwareerp/",
     "description": "All-in-one ERP software: CRM, HRMS, Payroll, Accounting, Inventory & Sales Management for SMEs & Enterprises in India.",
-    "image": "https://sapeagleerp.com/logo.jpeg",
+    "image": "https://vtechsoftwareerp/logo.jpeg",
     "offers": {
       "@type": "Offer",
       "price": "0.00",
       "priceCurrency": "INR",
-      "url": "https://sapeagleerp.com/book-demo-section"
+      "url": "https://vtechsoftwareerp.com/book-demo-section"
     }
   };
 
   return (
     <>
       <SEO
-        title="Home Page - SAPEAGLE ERP | ERP, CRM, HRMS & Accounting Software"
-        description="Welcome to SAPEAGLE ERP — All-in-one ERP software for SMEs & Enterprises. Manage CRM, HRMS, Payroll, Accounting, Inventory & Sales efficiently."
-        canonical="https://sapeagleerp.com/"
-        keywords="ERP software India, CRM software India, HRMS software, Payroll software, Accounting software, Inventory management software, SAPEAGLE ERP"
-        ogImage="https://sapeagleerp.com/logo.jpeg"
+        title="Home Page - vtech ERP | ERP, CRM, HRMS & Accounting Software"
+        description="Welcome to vtech ERP — All-in-one ERP software for SMEs & Enterprises. Manage CRM, HRMS, Payroll, Accounting, Inventory & Sales efficiently."
+        canonical="https://vtechsoftwareerp/"
+        keywords="ERP software India, CRM software India, HRMS software, Payroll software, Accounting software, Inventory management software, vtech ERP"
+        ogImage="https://vtechsoftwareerp/logo.jpeg"
         jsonLD={jsonLD}
       />
 

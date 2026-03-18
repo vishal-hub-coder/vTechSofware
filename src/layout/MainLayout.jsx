@@ -9,17 +9,17 @@ const MainLayout = () => {
     <>
      
       <Helmet>
-        <title>SAPEAGLE ERP PVT LTD - Best ERP, CRM, HRMS, Accounting & Inventory Software</title>
+        <title>vTechSoftware ERP PVT LTD - Best ERP, CRM, HRMS, Accounting & Inventory Software</title>
 
         <meta
           name="description"
-          content="SAPEAGLE ERP provides powerful business software including ERP, CRM, HRMS, Payroll, Accounting, Inventory, Sales, Cloud Solutions & Business Management Tools trusted by 30,000+ companies."
+          content="vTechSoftware ERP provides powerful business software including ERP, CRM, HRMS, Payroll, Accounting, Inventory, Sales, Cloud Solutions & Business Management Tools trusted by 30,000+ companies."
         />
         <meta
           name="keywords"
-          content="ERP software, CRM, HRMS, Payroll, Accounting Software, Inventory Management, Business Software, Cloud ERP, SAPEAGLE ERP"
+          content="ERP software, CRM, HRMS, Payroll, Accounting Software, Inventory Management, Business Software, Cloud ERP, vTechSoftware ERP"
         />
-        <meta name="author" content="SAPEAGLE ERP Pvt Ltd" />
+        <meta name="author" content="vTechSoftware ERP Pvt Ltd" />
         <meta name="robots" content="index, follow" />
         <meta property="og:title" content="India’s Best ERP Software | CRM, HRMS, Accounting & Inventory Suite" />
         <meta
@@ -28,7 +28,7 @@ const MainLayout = () => {
         />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="SAPEAGLE ERP - #1 Business ERP Software" />
+        <meta name="twitter:title" content="vTechSoftware ERP - #1 Business ERP Software" />
         <meta
           name="twitter:description"
           content="All-in-one ERP, CRM, HRMS, Payroll, Accounting, Inventory & Automation Tools."

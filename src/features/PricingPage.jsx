@@ -459,20 +459,20 @@ const PricingCard = ({ plan, index, billingCycle }) => {
 
       {/* CTA */}
       <div className="p-6 pt-0">
-        <motion.button
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className={`w-full py-4 rounded-xl font-bold text-lg transition-all duration-300 flex items-center justify-center gap-2 ${
-            plan.popular
-              ? `bg-gradient-to-r ${plan.color} text-white shadow-lg hover:shadow-xl`
-              : "bg-gray-800 text-white hover:bg-gray-900"
-          }`}
-        >
-          <Link to="/book-demo" className="flex items-center gap-2">
+        <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+          <Link
+            to="/payment"
+            state={{ plan: plan.name, amount: displayPrice }}
+            className={`w-full inline-flex py-4 rounded-xl font-bold text-lg transition-all duration-300 items-center justify-center gap-2 ${
+              plan.popular
+                ? `bg-gradient-to-r ${plan.color} text-white shadow-lg hover:shadow-xl`
+                : "bg-gray-800 text-white hover:bg-gray-900"
+            }`}
+          >
             Get Started
             <FaArrowRight />
           </Link>
-        </motion.button>
+        </motion.div>
       </div>
     </motion.div>
   );

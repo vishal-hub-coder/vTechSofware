@@ -71,7 +71,7 @@ const RegisterPage = () => {
       <SEO
         title="Register - vTech Software Solutions"
         description="Create your vTech ERP account"
-        canonical="https://sapeagleerp.com/register"
+        
       />
 
       {/* Animated Background Elements */}

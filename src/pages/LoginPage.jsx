@@ -54,7 +54,7 @@ const LoginPage = () => {
       <SEO
         title="Login - vTech Software Solutions"
         description="Login to your vTech ERP dashboard"
-        canonical="https://sapeagleerp.com/login"
+      
       />
 
       {/* Animated Background Elements */}

@@ -8,7 +8,7 @@ import SEO from "../layout/SEO";
 const HeroSection = () => {
   const [showChat, setShowChat] = useState(false);
 
-  const text = "Arise Awake and stop not Till the Goal is Reached";
+  const text = "Empower Your Business with Expert Freelance Talent";
   const [displayText, setDisplayText] = useState("");
   const [index, setIndex] = useState(0);
 
@@ -140,7 +140,7 @@ const HeroSection = () => {
           >
             <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
             <span className="text-sm font-medium text-gray-200">
-              India's #1 ERP Solution
+              Top Rated Freelancing Platform
             </span>
           </motion.div>
 
@@ -165,9 +165,9 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
           >
-            Streamline your business operations with our comprehensive ERP, CRM,
-            HRMS, Accounting & Inventory Management software tailored for
-            Indian businesses.
+            Connect with skilled freelancers worldwide. Get your projects done
+            faster, cheaper, and with professional quality. From web development
+            to graphic design, find the perfect talent for your business.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -182,14 +182,14 @@ const HeroSection = () => {
               whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(59, 130, 246, 0.4)" }}
               whileTap={{ scale: 0.98 }}
             >
-              Get Started
+              Find Freelancers
             </motion.button>
             <motion.button
               className="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl font-semibold text-white hover:bg-white/20 transition-all duration-300"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
             >
-              Watch Demo
+              Post a Project
             </motion.button>
           </motion.div>
 
@@ -201,9 +201,9 @@ const HeroSection = () => {
             transition={{ delay: 0.9, duration: 0.6 }}
           >
             {[
-              { number: "500+", label: "Clients" },
-              { number: "10+", label: "Years" },
-              { number: "24/7", label: "Support" },
+              { number: "10K+", label: "Freelancers" },
+              { number: "5K+", label: "Projects" },
+              { number: "98%", label: "Satisfaction" },
             ].map((stat, idx) => (
               <div key={idx} className="text-center md:text-left">
                 <div className="text-2xl md:text-3xl font-bold text-white">
@@ -233,7 +233,7 @@ const HeroSection = () => {
             {/* Main Image */}
             <motion.img
               src={Image1}
-              alt="SAPEAGLE ERP - Hero"
+              alt="vTechSoftware ERP - Hero"
               className="relative z-10 max-w-xs md:max-w-md lg:max-w-lg drop-shadow-2xl"
               whileHover={{ scale: 1.08, rotate: 1 }}
               transition={{ type: "spring", stiffness: 200, damping: 20 }}
@@ -263,9 +263,9 @@ const HeroSection = () => {
                 </div>
                 <div>
                   <div className="text-sm font-semibold text-white">
-                    ISO Certified
+                    Top Rated
                   </div>
-                  <div className="text-xs text-gray-400">Quality Assured</div>
+                  <div className="text-xs text-gray-400">Verified Freelancers</div>
                 </div>
               </div>
             </motion.div>
@@ -307,9 +307,9 @@ const HeroSection = () => {
 
       {/* SEO Component */}
       <SEO
-        title="Home Page - SAPEAGLE ERP"
-        description="Welcome to SAPEAGLE ERP — India's #1 ERP, CRM, HRMS, Accounting & Inventory Management Software."
-        canonical="https://sapeagleerp.com/"
+        title="Home Page - vTechSoftware Freelancing"
+        description="Connect with top-rated freelancers for your business projects. Find expert developers, designers, marketers and more on our freelancing platform."
+        canonical="https://vtechsoftwareerp/"
       />
     </section>
   );

@@ -111,9 +111,9 @@ const CustomerPage = () => {
   return (
     <div className="w-full overflow-hidden">
       <SEO
-        title="Customers - SAPEAGLE ERP"
-        description="Discover why thousands of businesses trust SAPEAGLE ERP for their digital transformation."
-        canonical="https://sapeagleerp.com/customers"
+        title="Customers - vTechSoftware ERP"
+        description="Discover why thousands of businesses trust vTechSoftware ERP for their digital transformation."
+        canonical="https://vtechsoftwareerp/customers"
       />
 
       {/* Hero Section */}
@@ -436,7 +436,7 @@ const CustomerPage = () => {
             Ready to Transform Your Business?
           </h2>
           <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
-            Join thousands of satisfied customers who have revolutionized their operations with SAPEAGLE ERP.
+            Join thousands of satisfied customers who have revolutionized their operations with vTechSoftware ERP.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="bg-white text-blue-600 px-10 py-4 rounded-xl font-bold text-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">

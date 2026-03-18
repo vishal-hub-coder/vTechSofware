@@ -4,8 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaSearch, FaCalendarAlt, FaFolder, FaTag, FaArrowRight, FaNewspaper, FaClock, FaUser } from "react-icons/fa";
 import SEO from "../layout/SEO";
 
-const API_BASE = "https://api.metasolution.in/api/News";
-const newPath = "http://erp.metasolution.in/Uploads/";
+const API_BASE = "https://vtechsoftwareerp/api/News";
+const newPath = "www.vtechsoftware/imgs";
 
 const slugify = (text) =>
   text
@@ -63,7 +63,7 @@ const AddBlog = () => {
       <SEO
         title="News & Updates - vTech Software Solutions"
         description="Read the latest news, articles, and updates from vTech Software"
-        canonical="https://sapeagleerp.com/blog"
+        
       />
 
       {/* Hero Section */}

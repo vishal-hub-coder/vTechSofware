@@ -96,7 +96,7 @@ const BookDemo = () => {
 
     try {
       const res = await axios.post(
-        "https://api.sapeagleerp.com/api/Customer/save",
+        "https://vtechsoftwareerp/api/Lead/InsertLead",
         payload,
         {
           headers: {
@@ -130,7 +130,7 @@ const BookDemo = () => {
       <SEO
         title="Book Demo - vTech Software Solutions"
         description="Book a free demo of vTech ERP software"
-        canonical="https://sapeagleerp.com/book-demo"
+       
       />
 
       {/* Animated Background */}
