@@ -101,7 +101,7 @@ const BookDemo = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            key: "a9f8e7d6c5b4a3f2981e7c5d4b3a2f6e",
+            key: "",
           },
         }
       );
