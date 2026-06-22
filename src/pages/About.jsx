@@ -49,7 +49,7 @@ const industriesData = [
     color: "from-green-500 to-emerald-400"
   },
   {
-    title: "Solar Management",
+    title: "Solar Managements",
     icon: <FaSolarPanel />,
     img: solar,
     description: "Intelligent solar energy management with real-time monitoring and optimization.",
