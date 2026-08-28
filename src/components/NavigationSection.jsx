@@ -122,7 +122,7 @@ const NavigationSection = () => {
         },
         {
           name: "Manufacturing",
-          path: "/manufacturing",
+          path: "/project-management",
           icon: <FaProjectDiagram />,
           desc: "Production Planning",
         },

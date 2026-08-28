@@ -1,6 +1,8 @@
-import React from "react";
-import { motion } from "framer-motion";
+
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Swal from "sweetalert2";
+
 import {
   FaWhatsapp,
   FaComments,
@@ -16,433 +18,812 @@ import {
   FaLifeRing,
   FaTicketAlt,
   FaVideo,
-  FaHandshake
+  FaHandshake,
+  FaChevronDown,
+  FaBolt,
+  FaShieldAlt,
+  FaStar,
+  FaUsers,
 } from "react-icons/fa";
 
-import supportImage from "../assets/supportImage.jpg";
 import SEO from "../layout/SEO";
+import supportImage from "../assets/supportImage.jpg";
 
 const supportOptions = [
-  { 
-    id: "whatsapp", 
-    title: "WhatsApp Support", 
-    subtitle: "Quick responses on WhatsApp",
+  {
+    id: "whatsapp",
+    title: "WhatsApp Support",
+    subtitle: "Quick responses from our team",
     icon: <FaWhatsapp />,
-    color: "from-green-500 to-green-600",
-    hoverColor: "hover:bg-green-50 hover:border-green-300"
+    gradient: "from-emerald-400 via-green-500 to-green-600",
+    soft: "bg-emerald-50",
+    text: "text-emerald-600",
+    border: "hover:border-emerald-300",
   },
-  { 
-    id: "chat", 
-    title: "Chat with Experts", 
-    subtitle: "Live chat with our team",
+  {
+    id: "chat",
+    title: "Chat with Experts",
+    subtitle: "Connect with our support team",
     icon: <FaComments />,
-    color: "from-blue-500 to-blue-600",
-    hoverColor: "hover:bg-blue-50 hover:border-blue-300"
+    gradient: "from-blue-400 via-blue-500 to-indigo-600",
+    soft: "bg-blue-50",
+    text: "text-blue-600",
+    border: "hover:border-blue-300",
   },
-  { 
-    id: "email", 
-    title: "Email Support", 
-    subtitle: "Get replies within 24 hours",
+  {
+    id: "email",
+    title: "Email Support",
+    subtitle: "Get detailed assistance",
     icon: <FaEnvelope />,
-    color: "from-purple-500 to-purple-600",
-    hoverColor: "hover:bg-purple-50 hover:border-purple-300"
+    gradient: "from-violet-400 via-purple-500 to-purple-700",
+    soft: "bg-purple-50",
+    text: "text-purple-600",
+    border: "hover:border-purple-300",
   },
-  { 
-    id: "call", 
-    title: "Calling Support", 
-    subtitle: "Talk to our support team",
+  {
+    id: "call",
+    title: "Calling Support",
+    subtitle: "Talk directly with our experts",
     icon: <FaPhone />,
-    color: "from-orange-500 to-orange-600",
-    hoverColor: "hover:bg-orange-50 hover:border-orange-300"
+    gradient: "from-orange-400 via-orange-500 to-red-500",
+    soft: "bg-orange-50",
+    text: "text-orange-600",
+    border: "hover:border-orange-300",
   },
-  { 
-    id: "skype", 
-    title: "Skype Support", 
-    subtitle: "Video call support",
+  {
+    id: "skype",
+    title: "Skype Support",
+    subtitle: "Video call with our team",
     icon: <FaSkype />,
-    color: "from-sky-500 to-sky-600",
-    hoverColor: "hover:bg-sky-50 hover:border-sky-300"
+    gradient: "from-sky-400 via-cyan-500 to-blue-600",
+    soft: "bg-sky-50",
+    text: "text-sky-600",
+    border: "hover:border-sky-300",
   },
-  { 
-    id: "remote", 
-    title: "Remote Desk Support", 
-    subtitle: "Screen sharing assistance",
+  {
+    id: "remote",
+    title: "Remote Desk Support",
+    subtitle: "Get hands-on technical help",
     icon: <FaDesktop />,
-    color: "from-indigo-500 to-indigo-600",
-    hoverColor: "hover:bg-indigo-50 hover:border-indigo-300"
+    gradient: "from-indigo-400 via-indigo-500 to-violet-600",
+    soft: "bg-indigo-50",
+    text: "text-indigo-600",
+    border: "hover:border-indigo-300",
   },
-  { 
-    id: "visit", 
-    title: "Visit Our Office", 
-    subtitle: "In-person consultation",
+  {
+    id: "visit",
+    title: "Visit Our Office",
+    subtitle: "Meet our team in person",
     icon: <FaMapMarkerAlt />,
-    color: "from-pink-500 to-pink-600",
-    hoverColor: "hover:bg-pink-50 hover:border-pink-300"
+    gradient: "from-pink-400 via-rose-500 to-red-500",
+    soft: "bg-pink-50",
+    text: "text-pink-600",
+    border: "hover:border-pink-300",
   },
-  { 
-    id: "ticket", 
-    title: "Raise a Ticket", 
-    subtitle: "Track your issue",
+  {
+    id: "ticket",
+    title: "Raise a Ticket",
+    subtitle: "Track and resolve your issue",
     icon: <FaTicketAlt />,
-    color: "from-teal-500 to-teal-600",
-    hoverColor: "hover:bg-teal-50 hover:border-teal-300"
+    gradient: "from-teal-400 via-cyan-500 to-teal-600",
+    soft: "bg-teal-50",
+    text: "text-teal-600",
+    border: "hover:border-teal-300",
+  },
+];
+
+const faqs = [
+  {
+    q: "What are your support hours?",
+    a: "Our standard support hours are Monday to Saturday, 9:00 AM to 7:00 PM. Critical issues can receive priority assistance outside standard hours.",
+  },
+  {
+    q: "How quickly will I receive a response?",
+    a: "For WhatsApp and calling support, our team generally responds quickly. Email requests may take up to 24 hours depending on the complexity of the issue.",
+  },
+  {
+    q: "How can I track my support ticket?",
+    a: "You can track your support request using the ticket ID provided after submitting your issue. Our support team can also provide the latest status.",
+  },
+  {
+    q: "Do you provide remote desktop support?",
+    a: "Yes. Our technical team can assist remotely using secure remote-support tools such as AnyDesk or TeamViewer when required.",
+  },
+  {
+    q: "Can I request a product demonstration?",
+    a: "Absolutely. You can contact our team to schedule a personalized demonstration of our ERP, CRM, HRMS, inventory, accounting and other business solutions.",
   },
 ];
 
 const SupportPage = () => {
+  const [openFaq, setOpenFaq] = useState(null);
+
   const jsonLD = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "vtech ERP - Support Page",
-    "operatingSystem": "Web",
-    "applicationCategory": "BusinessApplication",
-    "url": "https://vtechsoftwareerp/support",
-    "description": "vtech ERP Support — Contact us for help regarding CRM, HRMS, Payroll, Accounting, Inventory & Sales Management software.",
-    "image": "https://vtechsoftwareerp/assets/support-og-image.png",
-    "offers": {
-      "@type": "Offer",
-      "price": "0.00",
-      "priceCurrency": "INR",
-      "url": "https://vtechsoftwareerp/book-demo-section"
-    }
+    name: "vTech ERP - Support",
+    operatingSystem: "Web",
+    applicationCategory: "BusinessApplication",
+    url: "https://vtechsoftwareerp/support",
+    description:
+      "vTech ERP Support — Contact us for CRM, HRMS, Payroll, Accounting, Inventory and Sales Management software assistance.",
+    image: "https://vtechsoftwareerp/assets/support-og-image.png",
   };
 
-  const handleSupportClick = (type) => {
+  const handleSupportClick = (option) => {
     Swal.fire({
-      title: "Are you sure?",
-      text: `Do you want to continue with ${type}?`,
+      title: option.title,
+      text: `Do you want to continue with ${option.title}?`,
       icon: "question",
       showCancelButton: true,
-      confirmButtonColor: "#2563eb",
-      cancelButtonColor: "#d33",
       confirmButtonText: "Yes, Continue",
-      background: "#fefefe",
+      cancelButtonText: "Cancel",
+      confirmButtonColor: "#2563eb",
+      cancelButtonColor: "#64748b",
+      background: "#ffffff",
+      color: "#1e293b",
+      customClass: {
+        popup: "rounded-3xl",
+        confirmButton: "rounded-xl px-6 py-3",
+        cancelButton: "rounded-xl px-6 py-3",
+      },
     }).then((result) => {
-      if (result.isConfirmed) {
-        switch (type) {
-          case "WhatsApp Support":
-            window.open("https://wa.me/9326870893", "_blank");
-            break;
-          case "Chat with Experts":
-            Swal.fire("Chat Support", "Live chat expert will connect shortly...", "info");
-            break;
-          case "Email Support":
-            Swal.fire({
-              title: "Choose Email Address",
-              html: `
-                <div style="display: flex; flex-direction: column; gap: 12px;">
-                  <button id="mail1" class="swal2-confirm swal2-styled" style="background:#2563eb;">vtechsoftwarevishal@gmail.com</button>
+      if (!result.isConfirmed) return;
 
-                </div>
-              `,
-              showConfirmButton: false,
-              showCancelButton: true,
-              cancelButtonText: "Close",
-            });
-            setTimeout(() => {
-              document.getElementById("mail1").onclick = () =>
-                window.location.href = "mailto:vtechsoftwarevishal@gmail.com?subject=Support Request&body=Hello Team,";
-              document.getElementById("mail2").onclick = () =>
-                window.location.href = "mailto:support@vtechsoftwarevishal.com?subject=Support Request&body=Hello Team,";
-              document.getElementById("mail3").onclick = () =>
-                window.location.href = "mailto:admin@vtechsoftwarevishal.com?subject=Support Request&body=Hello Team,";
-              document.getElementById("mail4").onclick = () =>
-                window.location.href = "mailto:info@vtechsoftwarevishal.com?subject=Support Request&body=Hello Team,";
-            }, 200);
-            break;
-          case "Calling Support":
-            window.location.href = "tel:+91 9326870893";
-            break;
-          case "Skype Support":
-            window.open("skype:live:.cid.sample1234?call", "_self");
-            break;
-          case "Remote Desk Support":
-            Swal.fire("Remote Desk", "Our technician will connect via AnyDesk / TeamViewer shortly.", "success");
-            break;
-          case "Visit Our Office":
-            Swal.fire("Office Location", "You can visit us at: \nNew Delhi, India", "info");
-            break;
-          default:
-            break;
-        }
+      switch (option.id) {
+        case "whatsapp":
+          window.open("https://wa.me/9326870893", "_blank");
+          break;
+
+        case "chat":
+          Swal.fire({
+            icon: "info",
+            title: "Chat Support",
+            text: "Our live chat expert will connect with you shortly.",
+            confirmButtonColor: "#2563eb",
+          });
+          break;
+
+        case "email":
+          window.location.href =
+            "mailto:vtechsoftwarevishal@gmail.com?subject=Support Request&body=Hello Team,%0A%0AI need assistance regarding:";
+          break;
+
+        case "call":
+          window.location.href = "tel:+919326870893";
+          break;
+
+        case "skype":
+          window.open("skype:live:.cid.sample1234?call", "_self");
+          break;
+
+        case "remote":
+          Swal.fire({
+            icon: "success",
+            title: "Remote Support",
+            text: "Our technician will guide you through the remote-support process.",
+            confirmButtonColor: "#4f46e5",
+          });
+          break;
+
+        case "visit":
+          Swal.fire({
+            icon: "info",
+            title: "Visit Our Office",
+            html: `
+              <div style="line-height:1.8">
+                <strong>vTech Software Solutions</strong><br/>
+                New Delhi, India
+              </div>
+            `,
+            confirmButtonColor: "#ec4899",
+          });
+          break;
+
+        case "ticket":
+          Swal.fire({
+            icon: "info",
+            title: "Raise a Support Ticket",
+            text: "Our ticketing system will help you track your issue from start to resolution.",
+            confirmButtonColor: "#0d9488",
+          });
+          break;
+
+        default:
+          break;
       }
     });
   };
 
-  const getIcon = (title) => {
-    const option = supportOptions.find(opt => opt.title === title);
-    return option ? option.icon : null;
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
+    <div className="min-h-screen overflow-hidden bg-slate-50">
       <SEO
         title="Support - vTech Software Solutions"
-        description="Need help? Contact our support team via WhatsApp, Email, Chat, Phone, Skype, Remote Desk or Visit our office."
-      
-        keywords="vTech support, ERP software help, CRM software support, HRMS software support"
-        
+        description="Need help? Contact vTech Software Solutions through WhatsApp, Email, Chat, Phone, Skype, Remote Desk or Office Support."
+        keywords="vTech support, ERP support, CRM support, HRMS support, software support"
         jsonLD={jsonLD}
       />
 
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 py-20 overflow-hidden">
-        {/* Background Effects */}
+      {/* =========================================================
+          HERO SECTION
+      ========================================================== */}
+      <section className="relative isolate overflow-hidden bg-slate-950">
+        {/* Background Image */}
         <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-white/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl" />
-        </div>
-        <div className="absolute inset-0 opacity-10">
-          <div 
-            className="w-full h-full"
-            style={{
-              backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
-              backgroundSize: '20px 20px'
-            }}
+          <img
+            src={supportImage}
+            alt="vTech Support"
+            className="h-full w-full object-cover opacity-30"
           />
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-blue-950/95 to-indigo-950/95" />
         </div>
 
-        <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-          <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-cyan-200 text-sm font-medium mb-6 border border-white/20">
-              24/7 Customer Support
-            </span>
-          </motion.div>
-          
-          <motion.h1 
-            className="text-4xl md:text-6xl font-bold text-white mb-6"
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-          >
-            We're Here to{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-200">
-              Help You
-            </span>
-          </motion.h1>
-          
-          <motion.p 
-            className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto"
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-          >
-            Our dedicated support team is always ready to assist you through multiple channels. Choose the support option that suits you best.
-          </motion.p>
+        {/* Gradient Glow */}
+        <motion.div
+          className="absolute -left-32 top-10 h-96 w-96 rounded-full bg-cyan-500/20 blur-3xl"
+          animate={{
+            scale: [1, 1.25, 1],
+            opacity: [0.25, 0.5, 0.25],
+          }}
+          transition={{
+            duration: 7,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
 
-          {/* Support Stats */}
-          <motion.div 
-            className="flex flex-wrap justify-center gap-8 mt-12"
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
+        <motion.div
+          className="absolute -right-32 bottom-0 h-[500px] w-[500px] rounded-full bg-violet-600/20 blur-3xl"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.3, 0.55, 0.3],
+          }}
+          transition={{
+            duration: 9,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        {/* Grid */}
+        <div
+          className="absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)",
+            backgroundSize: "50px 50px",
+          }}
+        />
+
+        {/* Hero Content */}
+        <div className="relative z-10 mx-auto max-w-7xl px-6 py-24 sm:py-28 lg:py-32">
+          <div className="mx-auto max-w-4xl text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="mb-7"
+            >
+              <span className="inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-white/10 px-5 py-2.5 text-sm font-semibold text-cyan-200 shadow-lg shadow-cyan-500/10 backdrop-blur-xl">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
+                </span>
+                Premium Customer Support
+              </span>
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 35 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15, duration: 0.7 }}
+              className="text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
+            >
+              We're Here to{" "}
+              <span className="bg-gradient-to-r from-cyan-300 via-blue-300 to-violet-300 bg-clip-text text-transparent">
+                Help You
+              </span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.7 }}
+              className="mx-auto mt-7 max-w-3xl text-base leading-8 text-slate-300 sm:text-lg md:text-xl"
+            >
+              Get fast, reliable and expert assistance whenever you need it.
+              Connect with our team through multiple support channels designed
+              around your business.
+            </motion.p>
+
+            {/* Hero Stats */}
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.45, duration: 0.7 }}
+              className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-3"
+            >
+              {[
+                {
+                  icon: <FaBolt />,
+                  number: "< 1hr",
+                  label: "Fast Response",
+                },
+                {
+                  icon: <FaUsers />,
+                  number: "24/7",
+                  label: "Critical Support",
+                },
+                {
+                  icon: <FaStar />,
+                  number: "99%",
+                  label: "Customer Satisfaction",
+                },
+              ].map((item, index) => (
+                <div
+                  key={index}
+                  className="rounded-2xl border border-white/10 bg-white/[0.07] p-4 backdrop-blur-xl"
+                >
+                  <div className="mb-1 flex items-center justify-center gap-2 text-cyan-300">
+                    {item.icon}
+                    <span className="text-2xl font-black text-white">
+                      {item.number}
+                    </span>
+                  </div>
+                  <p className="text-sm text-slate-400">{item.label}</p>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Bottom Curve */}
+        <div className="absolute bottom-0 left-0 right-0 h-10 bg-slate-50 [clip-path:ellipse(65%_100%_at_50%_100%)]" />
+      </section>
+
+      {/* =========================================================
+          TRUST STRIP
+      ========================================================== */}
+      <section className="relative z-20 -mt-2 px-4">
+        <div className="mx-auto max-w-6xl">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-1 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl shadow-slate-200/60 sm:grid-cols-3"
           >
             {[
-              { number: "< 1hr", label: "Response Time" },
-              { number: "24/7", label: "Availability" },
-              { number: "99%", label: "Satisfaction" },
-            ].map((stat, index) => (
-              <div key={index} className="bg-white/10 backdrop-blur-sm rounded-xl px-6 py-3 border border-white/20">
-                <p className="text-2xl font-bold text-white">{stat.number}</p>
-                <p className="text-sm text-blue-200">{stat.label}</p>
+              {
+                icon: <FaShieldAlt />,
+                title: "Reliable Support",
+                text: "Professional assistance",
+              },
+              {
+                icon: <FaHeadset />,
+                title: "Expert Team",
+                text: "Skilled support engineers",
+              },
+              {
+                icon: <FaHandshake />,
+                title: "Customer First",
+                text: "Your success matters",
+              },
+            ].map((item, index) => (
+              <div
+                key={index}
+                className={`flex items-center gap-4 p-6 ${
+                  index !== 2 ? "border-b sm:border-b-0 sm:border-r" : ""
+                } border-slate-100`}
+              >
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-violet-600 text-lg text-white shadow-lg shadow-blue-500/20">
+                  {item.icon}
+                </div>
+
+                <div>
+                  <h3 className="font-bold text-slate-800">{item.title}</h3>
+                  <p className="text-sm text-slate-500">{item.text}</p>
+                </div>
               </div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* Main Content */}
-      <section className="py-16 px-4 -mt-8">
-        <div className="max-w-7xl mx-auto">
+      {/* =========================================================
+          SUPPORT OPTIONS
+      ========================================================== */}
+      <section className="relative py-24">
+        {/* Decorative background */}
+        <div className="pointer-events-none absolute left-0 top-20 h-72 w-72 rounded-full bg-blue-100/50 blur-3xl" />
+        <div className="pointer-events-none absolute right-0 top-1/2 h-80 w-80 rounded-full bg-purple-100/50 blur-3xl" />
+
+        <div className="relative mx-auto max-w-7xl px-6">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="bg-white rounded-3xl shadow-2xl overflow-hidden"
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mx-auto mb-14 max-w-3xl text-center"
           >
-            <div className="grid lg:grid-cols-2 gap-0">
-              {/* IMAGE SECTION */}
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 }}
-                className="relative bg-gradient-to-br from-blue-600 to-indigo-700 p-8 flex items-center justify-center"
-              >
-                <div className="absolute inset-0 opacity-10">
-                  <div 
-                    className="w-full h-full"
-                    style={{
-                      backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
-                      backgroundSize: '15px 15px'
-                    }}
-                  />
-                </div>
-                
-                <div className="relative z-10 text-center">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: 0.4, type: "spring" }}
-                    className="w-32 h-32 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-6"
-                  >
-                    <FaHeadset className="text-6xl text-white" />
-                  </motion.div>
-                  <h3 className="text-2xl font-bold text-white mb-2">Premium Support</h3>
-                  <p className="text-blue-200">We're just a click away</p>
-                  
-                  {/* Feature List */}
-                  <div className="mt-8 space-y-3 text-left">
-                    {[
-                      "Instant Response",
-                      "Expert Team",
-                      "Multiple Channels",
-                      "Happy Customers"
-                    ].map((item, index) => (
-                      <motion.div 
-                        key={index}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.5 + index * 0.1 }}
-                        className="flex items-center gap-2 text-white"
-                      >
-                        <FaCheckCircle className="text-cyan-300" />
-                        <span>{item}</span>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
+            <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-2 text-xs font-bold uppercase tracking-widest text-blue-700">
+              <FaLifeRing />
+              Support Center
+            </span>
 
-                {/* Decorative Elements */}
-                <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-purple-500/30 rounded-full blur-3xl" />
-                <div className="absolute -top-20 -left-20 w-64 h-64 bg-cyan-500/30 rounded-full blur-3xl" />
-              </motion.div>
+            <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
+              Choose How You Want{" "}
+              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                Help
+              </span>
+            </h2>
 
-              {/* RIGHT SECTION - Support Options */}
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3 }}
-                className="p-8 lg:p-12"
-              >
-                <h2 className="text-3xl font-bold text-gray-800 mb-2">
-                  Get Support
-                </h2>
-                <p className="text-gray-600 mb-8">
-                  Choose your preferred way to reach us
-                </p>
-
-                {/* Support Options Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {supportOptions.map((option, index) => (
-                    <motion.div
-                      key={option.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.4 + index * 0.05 }}
-                      whileHover={{ scale: 1.02, y: -2 }}
-                      onClick={() => handleSupportClick(option.title)}
-                      className={`
-                        group flex items-center gap-4 p-4 rounded-2xl border-2 border-gray-100 
-                        ${option.hoverColor} cursor-pointer transition-all duration-300
-                      `}
-                    >
-                      <div className={`
-                        w-14 h-14 rounded-xl bg-gradient-to-br ${option.color} 
-                        flex items-center justify-center text-white text-xl
-                        shadow-lg group-hover:scale-110 transition-transform duration-300
-                      `}>
-                        {option.icon}
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="font-bold text-gray-800 group-hover:text-blue-600 transition-colors">
-                          {option.title}
-                        </h3>
-                        <p className="text-sm text-gray-500">
-                          {option.subtitle}
-                        </p>
-                      </div>
-                      <FaArrowRight className="text-gray-300 group-hover:text-blue-500 group-hover:translate-x-1 transition-all duration-300" />
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* Contact Info */}
-                <div className="mt-8 pt-8 border-t border-gray-100">
-                  <h3 className="text-lg font-bold text-gray-800 mb-4">Direct Contact</h3>
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3 text-gray-600">
-                      <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                        <FaEnvelope className="text-blue-600" />
-                      </div>
-                      <span>vtechsoftwarevishal@gmail.com</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-gray-600">
-                      <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                        <FaPhone className="text-green-600" />
-                      </div>
-                      <span>+91 9326870893</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-gray-600">
-                      <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                        <FaClock className="text-purple-600" />
-                      </div>
-                      <span>Mon - Sat: 9:00 AM - 7:00 PM</span>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
+            <p className="mt-5 text-base leading-7 text-slate-500 sm:text-lg">
+              Whether you need technical assistance, product guidance or
+              account support, our team is ready to help.
+            </p>
           </motion.div>
+
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {supportOptions.map((option, index) => (
+              <motion.button
+                key={option.id}
+                type="button"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  delay: index * 0.06,
+                  duration: 0.5,
+                }}
+                whileHover={{
+                  y: -8,
+                  scale: 1.015,
+                }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => handleSupportClick(option)}
+                className={`group relative overflow-hidden rounded-3xl border-2 border-slate-100 bg-white p-6 text-left shadow-lg shadow-slate-200/50 transition-all duration-300 hover:shadow-2xl ${option.border}`}
+              >
+                {/* Hover glow */}
+                <div
+                  className={`absolute -right-10 -top-10 h-32 w-32 rounded-full bg-gradient-to-br ${option.gradient} opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20`}
+                />
+
+                <div className="relative">
+                  <div className="flex items-start justify-between">
+                    <div
+                      className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${option.gradient} text-xl text-white shadow-xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3`}
+                    >
+                      {option.icon}
+                    </div>
+
+                    <div
+                      className={`flex h-9 w-9 items-center justify-center rounded-full ${option.soft} ${option.text} transition-all group-hover:translate-x-1`}
+                    >
+                      <FaArrowRight className="text-sm" />
+                    </div>
+                  </div>
+
+                  <h3 className="mt-6 text-lg font-extrabold text-slate-800">
+                    {option.title}
+                  </h3>
+
+                  <p className="mt-2 text-sm leading-6 text-slate-500">
+                    {option.subtitle}
+                  </p>
+
+                  <div className="mt-5 flex items-center gap-2 text-xs font-bold text-slate-400">
+                    <span>CONTACT NOW</span>
+                    <span className="h-px flex-1 bg-slate-100" />
+                  </div>
+                </div>
+              </motion.button>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-16 px-4 bg-gray-50">
-        <div className="max-w-4xl mx-auto">
+      {/* =========================================================
+          PREMIUM SUPPORT CTA
+      ========================================================== */}
+      <section className="px-6 pb-24">
+        <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] bg-slate-950 shadow-2xl">
+          {/* Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-700/40 via-indigo-700/30 to-purple-700/40" />
+
+          {/* Glow */}
+          <div className="absolute -left-20 -top-20 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl" />
+          <div className="absolute -bottom-20 -right-20 h-72 w-72 rounded-full bg-purple-500/20 blur-3xl" />
+
+          <div className="relative grid items-center gap-10 p-8 sm:p-12 lg:grid-cols-[1fr_auto] lg:p-16">
+            <div>
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-cyan-300 backdrop-blur-xl">
+                <FaHeadset />
+                Need Immediate Assistance?
+              </div>
+
+              <h2 className="max-w-3xl text-3xl font-black text-white sm:text-4xl lg:text-5xl">
+                Your Problem.
+                <br />
+                <span className="bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">
+                  Our Priority.
+                </span>
+              </h2>
+
+              <p className="mt-5 max-w-2xl text-base leading-7 text-slate-300">
+                Don't let technical problems slow your business down. Connect
+                with our support team and get the assistance you need.
+              </p>
+
+              <div className="mt-7 flex flex-wrap gap-3">
+                {[
+                  "Expert Assistance",
+                  "Fast Response",
+                  "Secure Support",
+                ].map((item) => (
+                  <div
+                    key={item}
+                    className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-200"
+                  >
+                    <FaCheckCircle className="text-emerald-400" />
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
+              <button
+                onClick={() =>
+                  (window.location.href =
+                    "mailto:vtechsoftwarevishal@gmail.com?subject=Support Request")
+                }
+                className="group inline-flex items-center justify-center gap-3 rounded-2xl bg-white px-7 py-4 font-bold text-blue-700 shadow-xl transition-all hover:-translate-y-1 hover:shadow-2xl"
+              >
+                <FaEnvelope />
+                Contact Support
+                <FaArrowRight className="transition-transform group-hover:translate-x-1" />
+              </button>
+
+              <button
+                onClick={() =>
+                  (window.location.href = "tel:+919326870893")
+                }
+                className="inline-flex items-center justify-center gap-3 rounded-2xl border border-white/20 bg-white/10 px-7 py-4 font-bold text-white backdrop-blur-xl transition-all hover:bg-white/20"
+              >
+                <FaPhone />
+                Call Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================
+          DIRECT CONTACT
+      ========================================================== */}
+      <section className="bg-white py-20">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="mb-12 text-center">
+            <span className="text-sm font-bold uppercase tracking-widest text-blue-600">
+              Direct Contact
+            </span>
+
+            <h2 className="mt-3 text-3xl font-black text-slate-900 sm:text-4xl">
+              Talk to Our Team
+            </h2>
+
+            <p className="mx-auto mt-4 max-w-2xl text-slate-500">
+              Prefer direct communication? Reach us through the channels below.
+            </p>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-3">
+            {[
+              {
+                icon: <FaEnvelope />,
+                title: "Email",
+                value: "vtechsoftwarevishal@gmail.com",
+                gradient: "from-blue-500 to-indigo-600",
+              },
+              {
+                icon: <FaPhone />,
+                title: "Phone",
+                value: "+91 9326870893",
+                gradient: "from-emerald-500 to-teal-600",
+              },
+              {
+                icon: <FaClock />,
+                title: "Working Hours",
+                value: "Mon - Sat · 9 AM - 7 PM",
+                gradient: "from-purple-500 to-pink-600",
+              },
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ y: -6 }}
+                className="group rounded-3xl border border-slate-100 bg-slate-50 p-6 shadow-sm transition-all hover:bg-white hover:shadow-xl"
+              >
+                <div
+                  className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${item.gradient} text-xl text-white shadow-lg`}
+                >
+                  {item.icon}
+                </div>
+
+                <p className="mt-5 text-sm font-semibold text-slate-400">
+                  {item.title}
+                </p>
+
+                <p className="mt-2 break-words font-bold text-slate-800">
+                  {item.value}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================
+          FAQ
+      ========================================================== */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-slate-50 to-white py-24">
+        <div className="absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-blue-100/50 blur-3xl" />
+
+        <div className="relative mx-auto max-w-4xl px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="mb-12 text-center"
           >
-            <span className="inline-block px-4 py-1.5 bg-blue-100 text-blue-600 rounded-full text-sm font-semibold mb-4">
-              FAQ
+            <span className="inline-flex rounded-full bg-indigo-100 px-4 py-2 text-xs font-bold uppercase tracking-widest text-indigo-700">
+              Frequently Asked Questions
             </span>
-            <h2 className="text-3xl font-bold text-gray-800">Frequently Asked Questions</h2>
+
+            <h2 className="mt-5 text-3xl font-black text-slate-900 sm:text-4xl">
+              Everything You Need to Know
+            </h2>
+
+            <p className="mt-4 text-slate-500">
+              Find quick answers to common support questions.
+            </p>
           </motion.div>
 
           <div className="space-y-4">
-            {[
-              {
-                q: "What are your support hours?",
-                a: "Our support team is available 24/7 for critical issues, and standard hours are Mon-Sat 9:00 AM to 7:00 PM."
-              },
-              {
-                q: "How can I track my support ticket?",
-                a: "You can track your ticket status by logging into your account dashboard or by using the ticket ID sent to your email."
-              },
-              {
-                q: "Do you offer remote support?",
-                a: "Yes, we provide remote desktop support via AnyDesk or TeamViewer for quick issue resolution."
-              }
-            ].map((faq, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow"
-              >
-                <h4 className="font-bold text-gray-800 mb-2">{faq.q}</h4>
-                <p className="text-gray-600">{faq.a}</p>
-              </motion.div>
-            ))}
+            {faqs.map((faq, index) => {
+              const isOpen = openFaq === index;
+
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.07 }}
+                  className={`overflow-hidden rounded-2xl border bg-white shadow-sm transition-all duration-300 ${
+                    isOpen
+                      ? "border-blue-200 shadow-xl shadow-blue-100/40"
+                      : "border-slate-100 hover:border-slate-200 hover:shadow-md"
+                  }`}
+                >
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setOpenFaq(isOpen ? null : index)
+                    }
+                    className="flex w-full items-center justify-between gap-5 p-6 text-left"
+                  >
+                    <div className="flex items-center gap-4">
+                      <span
+                        className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-sm font-bold ${
+                          isOpen
+                            ? "bg-blue-600 text-white"
+                            : "bg-blue-50 text-blue-600"
+                        }`}
+                      >
+                        {index + 1}
+                      </span>
+
+                      <span className="font-bold text-slate-800">
+                        {faq.q}
+                      </span>
+                    </div>
+
+                    <FaChevronDown
+                      className={`shrink-0 text-slate-400 transition-transform duration-300 ${
+                        isOpen ? "rotate-180 text-blue-600" : ""
+                      }`}
+                    />
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25 }}
+                      >
+                        <div className="border-t border-slate-100 px-6 pb-6 pt-5 pl-[4.75rem] text-sm leading-7 text-slate-500">
+                          {faq.a}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              );
+            })}
           </div>
+        </div>
+      </section>
+
+      {/* =========================================================
+          FINAL CTA
+      ========================================================== */}
+      <section className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-700 py-20">
+        <motion.div
+          className="absolute left-10 top-10 h-40 w-40 rounded-full bg-white/10 blur-2xl"
+          animate={{
+            scale: [1, 1.3, 1],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+          }}
+        />
+
+        <motion.div
+          className="absolute bottom-0 right-10 h-56 w-56 rounded-full bg-cyan-400/10 blur-3xl"
+          animate={{
+            scale: [1.2, 1, 1.2],
+          }}
+          transition={{
+            duration: 7,
+            repeat: Infinity,
+          }}
+        />
+
+        <div className="relative mx-auto max-w-4xl px-6 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/15 text-3xl text-white backdrop-blur-xl">
+              <FaHeadset />
+            </div>
+
+            <h2 className="text-3xl font-black text-white sm:text-4xl md:text-5xl">
+              Still Need Help?
+            </h2>
+
+            <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-blue-100">
+              Our support team is ready to help you solve your problem and
+              keep your business running smoothly.
+            </p>
+
+            <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+              <button
+                onClick={() =>
+                  (window.location.href =
+                    "mailto:vtechsoftwarevishal@gmail.com?subject=Support Request")
+                }
+                className="group inline-flex items-center justify-center gap-3 rounded-2xl bg-white px-8 py-4 font-bold text-blue-700 shadow-xl transition-all hover:-translate-y-1 hover:shadow-2xl"
+              >
+                <FaEnvelope />
+                Get in Touch
+                <FaArrowRight className="transition-transform group-hover:translate-x-1" />
+              </button>
+
+              <button
+                onClick={() =>
+                  window.open("https://wa.me/9326870893", "_blank")
+                }
+                className="inline-flex items-center justify-center gap-3 rounded-2xl border border-white/30 bg-white/10 px-8 py-4 font-bold text-white backdrop-blur-xl transition-all hover:bg-white/20"
+              >
+                <FaWhatsapp />
+                WhatsApp Us
+              </button>
+            </div>
+          </motion.div>
         </div>
       </section>
     </div>
@@ -450,3 +831,4 @@ const SupportPage = () => {
 };
 
 export default SupportPage;
+

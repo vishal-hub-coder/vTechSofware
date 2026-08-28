@@ -1,24 +1,34 @@
-import React, { useState, useEffect } from "react";
+
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import DashboardImage from "../assets/image.png";
 import SEO from "../layout/SEO";
-import { 
-  FaUsers, 
-  FaGlobe, 
-  FaProjectDiagram, 
-  FaAward, 
-  FaArrowRight, 
+
+import {
+  FaUsers,
+  FaGlobe,
+  FaProjectDiagram,
+  FaAward,
+  FaArrowRight,
   FaCheckCircle,
   FaChartLine,
-  FaDatabase,
   FaShoppingCart,
   FaBox,
   FaLayerGroup,
   FaCogs,
   FaPlay,
-  FaStar
+  FaStar,
+  FaRocket,
+  FaShieldAlt,
+  FaBolt,
+  FaDatabase,
+  FaIndustry,
 } from "react-icons/fa";
+
+/* =========================================================
+   DATA
+========================================================= */
 
 const companies = [
   {
@@ -48,50 +58,102 @@ const companies = [
 ];
 
 const stats = [
-  { number: "5,000+", label: "Happy Customers", icon: <FaUsers />, color: "from-blue-500 to-cyan-400" },
-  { number: "1,200+", label: "Websites Delivered", icon: <FaGlobe />, color: "from-green-500 to-teal-400" },
-  { number: "800+", label: "Projects Completed", icon: <FaProjectDiagram />, color: "from-purple-500 to-pink-400" },
-  { number: "15+", label: "Years Experience", icon: <FaAward />, color: "from-orange-500 to-red-400" },
+  {
+    number: "5,000+",
+    label: "Happy Customers",
+    icon: <FaUsers />,
+    gradient: "from-blue-500 to-cyan-400",
+    shadow: "shadow-blue-500/20",
+  },
+  {
+    number: "1,200+",
+    label: "Websites Delivered",
+    icon: <FaGlobe />,
+    gradient: "from-emerald-500 to-teal-400",
+    shadow: "shadow-emerald-500/20",
+  },
+  {
+    number: "800+",
+    label: "Projects Completed",
+    icon: <FaProjectDiagram />,
+    gradient: "from-violet-500 to-fuchsia-500",
+    shadow: "shadow-violet-500/20",
+  },
+  {
+    number: "15+",
+    label: "Years Experience",
+    icon: <FaAward />,
+    gradient: "from-orange-500 to-rose-500",
+    shadow: "shadow-orange-500/20",
+  },
 ];
 
 const features = [
   {
     title: "LMS Dashboard",
-    desc: "Manage learning content, track employee progress, and analyze training effectiveness with comprehensive analytics.",
+    desc: "Manage learning content, track employee progress and analyze training performance from one powerful dashboard.",
     icon: <FaLayerGroup />,
-    color: "from-blue-500 to-cyan-400"
+    gradient: "from-blue-500 to-cyan-400",
+    bg: "bg-blue-50",
   },
   {
     title: "Service Dashboard",
-    desc: "Deliver exceptional services with real-time tracking, SLA management, and customer satisfaction metrics.",
+    desc: "Deliver exceptional services with real-time tracking, SLA management and customer satisfaction analytics.",
     icon: <FaCogs />,
-    color: "from-green-500 to-teal-400"
+    gradient: "from-emerald-500 to-teal-400",
+    bg: "bg-emerald-50",
   },
   {
     title: "Inventory Dashboard",
-    desc: "Monitor stock levels across warehouses, optimize reorder points, and streamline supply chain operations.",
+    desc: "Monitor stock levels, warehouses, reorder points and supply chain operations in real time.",
     icon: <FaBox />,
-    color: "from-purple-500 to-pink-400"
+    gradient: "from-violet-500 to-fuchsia-500",
+    bg: "bg-violet-50",
   },
   {
     title: "Orders Dashboard",
-    desc: "Process orders efficiently with automated billing, payment tracking, and delivery management.",
+    desc: "Process orders faster with automated billing, payment tracking and delivery management.",
     icon: <FaShoppingCart />,
-    color: "from-orange-500 to-red-400"
+    gradient: "from-orange-500 to-rose-500",
+    bg: "bg-orange-50",
   },
   {
     title: "Project Dashboard",
-    desc: "Collaborate seamlessly with task management, timeline tracking, and resource allocation tools.",
+    desc: "Collaborate with powerful task management, project timelines and resource allocation tools.",
     icon: <FaProjectDiagram />,
-    color: "from-indigo-500 to-purple-400"
+    gradient: "from-indigo-500 to-purple-500",
+    bg: "bg-indigo-50",
   },
   {
     title: "Production Dashboard",
-    desc: "Optimize manufacturing with production planning, quality control, and performance analytics.",
+    desc: "Optimize manufacturing with production planning, quality control and advanced analytics.",
     icon: <FaChartLine />,
-    color: "from-cyan-500 to-blue-400"
+    gradient: "from-cyan-500 to-blue-500",
+    bg: "bg-cyan-50",
   },
 ];
+
+const benefits = [
+  {
+    icon: <FaBolt />,
+    title: "Lightning Fast",
+    text: "Optimized workflows help your teams work faster and smarter.",
+  },
+  {
+    icon: <FaShieldAlt />,
+    title: "Secure & Reliable",
+    text: "Enterprise-grade security keeps your business data protected.",
+  },
+  {
+    icon: <FaDatabase />,
+    title: "Centralized Data",
+    text: "Bring departments, operations and reports together in one place.",
+  },
+];
+
+/* =========================================================
+   CUSTOMER PAGE
+========================================================= */
 
 const CustomerPage = () => {
   const text = "Transforming Customer Connections, One Click at a Time.";
@@ -102,140 +164,234 @@ const CustomerPage = () => {
     if (index < text.length) {
       const timeout = setTimeout(() => {
         setDisplayText((prev) => prev + text[index]);
-        setIndex(index + 1);
-      }, 80);
+        setIndex((prev) => prev + 1);
+      }, 55);
+
       return () => clearTimeout(timeout);
     }
   }, [index, text]);
 
   return (
-    <div className="w-full overflow-hidden">
+    <div className="w-full overflow-hidden bg-white text-gray-900">
       <SEO
         title="Customers - vTechSoftware ERP"
         description="Discover why thousands of businesses trust vTechSoftware ERP for their digital transformation."
         canonical="https://vtechsoftwareerp/customers"
       />
 
-      {/* Hero Section */}
-      <section
-        className="relative min-h-[85vh] flex items-center justify-center text-center bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80')",
-        }}
-      >
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 via-blue-800/85 to-indigo-900/90" />
-        
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <motion.div 
-            className="absolute top-20 left-10 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl"
-            animate={{ 
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.5, 0.3]
-            }}
-            transition={{ duration: 8, repeat: Infinity }}
-          />
-          <motion.div 
-            className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"
-            animate={{ 
-              scale: [1.2, 1, 1.2],
-              opacity: [0.3, 0.5, 0.3]
-            }}
-            transition={{ duration: 10, repeat: Infinity }}
-          />
-        </div>
+      {/* =====================================================
+          HERO SECTION
+      ===================================================== */}
 
-        {/* Content */}
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-slate-950">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center scale-105"
+          style={{
+            backgroundImage:
+              "url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1800&q=85')",
+          }}
+        />
+
+        {/* Dark Premium Overlay */}
+        <div className="absolute inset-0 bg-slate-950/75" />
+
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-950/95 via-indigo-900/80 to-purple-950/90" />
+
+        {/* Animated Glow 1 */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          className="absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-cyan-500/20 blur-[120px]"
+          animate={{
+            scale: [1, 1.25, 1],
+            opacity: [0.3, 0.55, 0.3],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        {/* Animated Glow 2 */}
+        <motion.div
+          className="absolute -bottom-40 -right-40 h-[550px] w-[550px] rounded-full bg-purple-500/25 blur-[130px]"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.25, 0.5, 0.25],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        {/* Floating Circles */}
+        <motion.div
+          className="absolute top-24 right-[12%] h-4 w-4 rounded-full bg-cyan-300 shadow-lg shadow-cyan-300/50"
+          animate={{ y: [0, -25, 0], opacity: [0.4, 1, 0.4] }}
+          transition={{ duration: 3, repeat: Infinity }}
+        />
+
+        <motion.div
+          className="absolute bottom-32 left-[12%] h-3 w-3 rounded-full bg-purple-300"
+          animate={{ y: [0, 20, 0], opacity: [0.3, 1, 0.3] }}
+          transition={{ duration: 4, repeat: Infinity }}
+        />
+
+        {/* Grid Pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.08]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.8) 1px, transparent 1px)",
+            backgroundSize: "70px 70px",
+          }}
+        />
+
+        {/* Hero Content */}
+        <motion.div
+          initial={{ opacity: 0, y: 45 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="relative z-10 text-white px-4 sm:px-6 max-w-5xl mx-auto"
+          transition={{ duration: 0.9 }}
+          className="relative z-10 mx-auto max-w-6xl px-5 py-28 text-center sm:px-6"
         >
+          {/* Badge */}
           <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="mb-6"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.15 }}
+            className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2.5 text-sm font-semibold text-cyan-200 shadow-xl backdrop-blur-xl"
           >
-            <span className="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-cyan-300 text-sm font-medium border border-white/20">
-              Trusted by Industry Leaders
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-300 opacity-75" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-cyan-400" />
             </span>
+            Trusted by Industry Leaders
           </motion.div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight">
+          {/* Heading */}
+          <h1 className="mx-auto max-w-5xl text-4xl font-black leading-[1.08] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
             {displayText}
-            <motion.span 
-              className="inline-block w-1 h-12 md:h-16 bg-cyan-400 ml-1"
-              animate={{ opacity: [1, 0] }}
+            <motion.span
+              className="ml-1 inline-block h-10 w-1 rounded-full bg-cyan-400 align-middle shadow-lg shadow-cyan-400/50 sm:h-12 md:h-16"
+              animate={{ opacity: [1, 0, 1] }}
               transition={{ repeat: Infinity, duration: 0.8 }}
             />
           </h1>
-          
-          <motion.p 
-            className="text-xl sm:text-2xl md:text-3xl text-blue-100 mb-10 max-w-3xl mx-auto leading-relaxed"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-          >
-            Irresistible Features Tailored for Business Excellence
-          </motion.p>
 
-          <motion.div 
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+          {/* Gradient Sub Heading */}
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7 }}
+            transition={{ delay: 0.5 }}
+            className="mx-auto mt-7 max-w-3xl text-lg font-medium leading-relaxed text-blue-100 sm:text-xl md:text-2xl"
           >
-            <button className="group bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-2">
-              <Link to="/book-demo">Get Started</Link>
-              <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
+            Irresistible features, intelligent workflows and powerful
+            dashboards built for modern business excellence.
+          </motion.p>
+
+          {/* Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7 }}
+            className="mt-10 flex flex-col justify-center gap-4 sm:flex-row"
+          >
+            <Link
+              to="/book-demo"
+              className="group inline-flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 px-8 py-4 text-base font-bold text-white shadow-2xl shadow-blue-500/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-cyan-500/30 sm:text-lg"
+            >
+              Get Started
+              <FaArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
+
+            <button className="group inline-flex items-center justify-center gap-3 rounded-2xl border border-white/25 bg-white/10 px-8 py-4 text-base font-bold text-white backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/20 sm:text-lg">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10">
+                <FaPlay className="ml-0.5 text-sm text-cyan-300" />
+              </span>
+              Watch Demo
             </button>
-            <button className="group bg-white/10 backdrop-blur-sm hover:bg-white/20 px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 border border-white/30 flex items-center justify-center gap-2">
-              <FaPlay className="text-cyan-400" />
-              <span>Watch Demo</span>
-            </button>
+          </motion.div>
+
+          {/* Trust Text */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+            className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-blue-100/70"
+          >
+            <span className="flex items-center gap-2">
+              <FaCheckCircle className="text-emerald-400" />
+              No credit card required
+            </span>
+
+            <span className="hidden h-1 w-1 rounded-full bg-white/30 sm:block" />
+
+            <span className="flex items-center gap-2">
+              <FaCheckCircle className="text-emerald-400" />
+              Free consultation
+            </span>
+
+            <span className="hidden h-1 w-1 rounded-full bg-white/30 sm:block" />
+
+            <span className="flex items-center gap-2">
+              <FaCheckCircle className="text-emerald-400" />
+              Enterprise ready
+            </span>
           </motion.div>
         </motion.div>
 
         {/* Scroll Indicator */}
-        <motion.div 
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-          animate={{ y: [0, 10, 0] }}
+        <motion.div
+          className="absolute bottom-7 left-1/2 -translate-x-1/2"
+          animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center pt-2">
-            <motion.div 
-              className="w-1.5 h-3 bg-white/80 rounded-full"
-              animate={{ opacity: [1, 0.5, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
+          <div className="flex h-10 w-6 justify-center rounded-full border-2 border-white/30 pt-2">
+            <motion.div
+              className="h-2.5 w-1 rounded-full bg-white/80"
+              animate={{ opacity: [1, 0.3, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
             />
           </div>
         </motion.div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-20 bg-white relative -mt-10">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+      {/* =====================================================
+          STATS SECTION
+      ===================================================== */}
+
+      <section className="relative bg-gradient-to-b from-slate-50 to-white py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6">
+          <div className="-mt-28 grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-4">
             {stats.map((stat, index) => (
               <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
+                key={stat.label}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.15 }}
-                className="bg-white rounded-2xl p-6 sm:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 text-center group"
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -8 }}
+                className="group relative overflow-hidden rounded-3xl border border-white/80 bg-white p-5 text-center shadow-xl shadow-slate-200/70 transition-all duration-300 hover:shadow-2xl sm:p-7"
               >
-                <div className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${stat.color} rounded-2xl mb-4 text-white text-2xl shadow-lg group-hover:scale-110 transition-transform`}>
+                {/* Top Gradient */}
+                <div
+                  className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${stat.gradient}`}
+                />
+
+                <div
+                  className={`mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${stat.gradient} text-xl text-white shadow-lg ${stat.shadow} transition-transform duration-300 group-hover:scale-110 sm:h-16 sm:w-16 sm:text-2xl`}
+                >
                   {stat.icon}
                 </div>
-                <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-800 mb-2">
+
+                <h2 className="text-2xl font-black tracking-tight text-slate-800 sm:text-4xl">
                   {stat.number}
                 </h2>
-                <p className="text-gray-600 font-medium">
+
+                <p className="mt-1 text-xs font-semibold text-slate-500 sm:text-sm">
                   {stat.label}
                 </p>
               </motion.div>
@@ -244,43 +400,57 @@ const CustomerPage = () => {
         </div>
       </section>
 
-      {/* Trusted Companies Section */}
-      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-6">
+      {/* =====================================================
+          TRUSTED COMPANIES
+      ===================================================== */}
+
+      <section className="border-y border-slate-100 bg-slate-50/70 py-20">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="mx-auto mb-12 max-w-2xl text-center"
           >
-            <span className="inline-block px-4 py-1.5 bg-blue-100 text-blue-600 rounded-full text-sm font-semibold mb-4">
-              OUR PARTNERS
+            <span className="inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-2 text-xs font-bold tracking-wider text-blue-600">
+              <FaStar />
+              OUR TRUSTED NETWORK
             </span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
-              Trusted By Leading Companies
+
+            <h2 className="mt-5 text-3xl font-black tracking-tight text-slate-800 sm:text-4xl md:text-5xl">
+              Trusted By{" "}
+              <span className="bg-gradient-to-r from-blue-600 via-violet-600 to-fuchsia-600 bg-clip-text text-transparent">
+                Leading Companies
+              </span>
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Join hundreds of industry leaders who rely on our solutions
+
+            <p className="mt-4 text-base leading-relaxed text-slate-500 sm:text-lg">
+              Join hundreds of businesses that rely on modern technology and
+              intelligent digital solutions.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6">
             {companies.map((company, index) => (
               <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
+                key={company.name}
+                initial={{ opacity: 0, scale: 0.85 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="bg-white p-6 rounded-2xl shadow-md flex flex-col items-center justify-center hover:shadow-xl transition-all duration-300 border border-gray-100 group"
+                transition={{ delay: index * 0.08 }}
+                whileHover={{ y: -7, scale: 1.03 }}
+                className="group flex min-h-[130px] flex-col items-center justify-center rounded-2xl border border-slate-100 bg-white p-5 shadow-sm transition-all duration-300 hover:border-blue-100 hover:shadow-xl"
               >
-                <img
-                  src={company.logo}
-                  alt={company.name}
-                  className="h-10 object-contain mb-3 filter grayscale group-hover:grayscale-0 transition-all duration-300"
-                />
-                <p className="text-gray-600 font-semibold text-xs sm:text-sm text-center">
+                <div className="flex h-14 w-full items-center justify-center">
+                  <img
+                    src={company.logo}
+                    alt={company.name}
+                    loading="lazy"
+                    className="max-h-10 max-w-[110px] object-contain grayscale opacity-60 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100"
+                  />
+                </div>
+
+                <p className="mt-4 text-xs font-bold text-slate-400 transition-colors group-hover:text-blue-600 sm:text-sm">
                   {company.name}
                 </p>
               </motion.div>
@@ -289,124 +459,51 @@ const CustomerPage = () => {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
+      {/* =====================================================
+          BENEFITS
+      ===================================================== */}
+
+      <section className="bg-white py-20 sm:py-24">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="mx-auto mb-14 max-w-3xl text-center"
           >
-            <span className="inline-block px-4 py-1.5 bg-purple-100 text-purple-600 rounded-full text-sm font-semibold mb-4">
-              POWERFUL FEATURES
+            <span className="rounded-full bg-emerald-100 px-4 py-2 text-xs font-bold tracking-wider text-emerald-600">
+              WHY BUSINESSES CHOOSE US
             </span>
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-800 mb-4">
-              Everything You Need to{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600">
-                Succeed
+
+            <h2 className="mt-5 text-3xl font-black text-slate-800 sm:text-4xl md:text-5xl">
+              Built For{" "}
+              <span className="bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent">
+                Business Growth
               </span>
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-              Comprehensive dashboards designed to streamline your operations and boost productivity
-            </p>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mt-6 rounded-full" />
           </motion.div>
 
-          {/* Main Feature */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 120, damping: 12 }}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20"
-          >
-            <div className="relative">
+          <div className="grid gap-6 md:grid-cols-3">
+            {benefits.map((benefit, index) => (
               <motion.div
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
-                className="relative overflow-hidden rounded-3xl shadow-2xl"
-              >
-                <img
-                  src={DashboardImage}
-                  alt="Company Dashboard"
-                  className="w-full h-auto"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-              </motion.div>
-              
-              {/* Floating Badge */}
-              <motion.div 
-                className="absolute -bottom-6 -right-6 bg-white p-6 rounded-2xl shadow-xl"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5 }}
-              >
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center">
-                    <FaAward className="text-green-600 text-2xl" />
-                  </div>
-                  <div>
-                    <p className="text-2xl font-bold text-gray-800">#1 ERP</p>
-                    <p className="text-gray-500 text-sm">in India</p>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-            
-            <div className="space-y-6">
-              <h3 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-800 leading-tight">
-                Enterprise Resource{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500">
-                  Planning
-                </span>
-              </h3>
-              <p className="text-lg text-gray-600 leading-relaxed">
-                A comprehensive business management software that automates and integrates core business processes. Think of it as a central hub connecting various departments and functions within your company.
-              </p>
-              
-              <div className="space-y-3">
-                {[
-                  "Seamless Department Integration",
-                  "Real-time Data Synchronization",
-                  "Scalable Architecture",
-                  "Advanced Analytics & Reporting"
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-3">
-                    <FaCheckCircle className="text-green-500 text-xl" />
-                    <span className="text-gray-700 font-medium">{item}</span>
-                  </div>
-                ))}
-              </div>
-
-              <button className="group bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-400 hover:to-purple-500 px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center gap-2">
-                <Link to="/erp-feature-section">Explore ERP</Link>
-                <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
-              </button>
-            </div>
-          </motion.div>
-
-          {/* Feature Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
+                key={benefit.title}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: index * 0.12 }}
                 whileHover={{ y: -8 }}
-                className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 group"
+                className="group rounded-3xl border border-slate-100 bg-gradient-to-br from-white to-slate-50 p-7 shadow-lg shadow-slate-200/40 transition-all duration-300 hover:shadow-2xl"
               >
-                <div className={`inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br ${feature.color} rounded-xl mb-4 text-white text-xl shadow-lg group-hover:scale-110 transition-transform`}>
-                  {feature.icon}
+                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-violet-600 text-xl text-white shadow-lg shadow-blue-500/20 transition-transform duration-300 group-hover:scale-110">
+                  {benefit.icon}
                 </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-600 transition-all">
-                  {feature.title}
+
+                <h3 className="text-xl font-extrabold text-slate-800">
+                  {benefit.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {feature.desc}
+
+                <p className="mt-3 leading-relaxed text-slate-500">
+                  {benefit.text}
                 </p>
               </motion.div>
             ))}
@@ -414,37 +511,292 @@ const CustomerPage = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-indigo-700 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div 
-            className="w-full h-full"
-            style={{
-              backgroundImage: `radial-gradient(circle at 20% 50%, rgba(255,255,255,0.3) 1px, transparent 1px)`,
-              backgroundSize: '30px 30px'
-            }}
-          />
+      {/* =====================================================
+          ERP FEATURE SECTION
+      ===================================================== */}
+
+      <section className="relative overflow-hidden bg-slate-50 py-24 sm:py-28">
+        {/* Background Glow */}
+        <div className="absolute -left-40 top-20 h-96 w-96 rounded-full bg-blue-300/20 blur-[120px]" />
+        <div className="absolute -right-40 bottom-20 h-96 w-96 rounded-full bg-purple-300/20 blur-[120px]" />
+
+        <div className="relative mx-auto max-w-7xl px-5 sm:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mx-auto mb-16 max-w-3xl text-center"
+          >
+            <span className="rounded-full bg-purple-100 px-4 py-2 text-xs font-bold tracking-wider text-purple-600">
+              POWERFUL ERP PLATFORM
+            </span>
+
+            <h2 className="mt-5 text-3xl font-black tracking-tight text-slate-800 sm:text-4xl md:text-5xl">
+              Everything You Need To{" "}
+              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-fuchsia-600 bg-clip-text text-transparent">
+                Succeed
+              </span>
+            </h2>
+
+            <p className="mt-5 text-base leading-relaxed text-slate-500 sm:text-lg">
+              A complete ecosystem of intelligent dashboards designed to
+              simplify operations and accelerate productivity.
+            </p>
+
+            <div className="mx-auto mt-7 h-1 w-24 rounded-full bg-gradient-to-r from-blue-500 to-purple-600" />
+          </motion.div>
+
+          {/* Main ERP */}
+          <div className="grid items-center gap-14 lg:grid-cols-2">
+            {/* Image */}
+            <motion.div
+              initial={{ opacity: 0, x: -60 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="relative"
+            >
+              <div className="absolute -inset-5 rounded-[2rem] bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-cyan-500/20 blur-2xl" />
+
+              <motion.div
+                whileHover={{ scale: 1.015 }}
+                className="relative overflow-hidden rounded-[2rem] border border-white bg-white p-2 shadow-2xl shadow-slate-300/60"
+              >
+                <img
+                  src={DashboardImage}
+                  alt="vTechSoftware ERP Dashboard"
+                  className="w-full rounded-[1.5rem] object-cover"
+                />
+
+                <div className="absolute inset-2 rounded-[1.5rem] bg-gradient-to-t from-slate-950/20 to-transparent pointer-events-none" />
+              </motion.div>
+
+              {/* Floating Card */}
+              <motion.div
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5 }}
+                className="absolute -bottom-6 -right-3 rounded-2xl border border-white/80 bg-white/95 p-4 shadow-2xl backdrop-blur-xl sm:-right-6 sm:p-5"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-green-600 text-white shadow-lg shadow-emerald-500/20">
+                    <FaAward />
+                  </div>
+
+                  <div>
+                    <p className="text-lg font-black text-slate-800 sm:text-xl">
+                      #1 ERP
+                    </p>
+                    <p className="text-xs font-medium text-slate-500">
+                      Business Management
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+
+            {/* Content */}
+            <motion.div
+              initial={{ opacity: 0, x: 60 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="space-y-7"
+            >
+              <div className="flex items-center gap-3">
+                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-100 text-blue-600">
+                  <FaIndustry />
+                </span>
+
+                <span className="text-sm font-bold uppercase tracking-wider text-blue-600">
+                  Enterprise Resource Planning
+                </span>
+              </div>
+
+              <h3 className="text-3xl font-black leading-tight text-slate-800 sm:text-4xl md:text-5xl">
+                One Platform.
+                <br />
+                <span className="bg-gradient-to-r from-orange-500 via-rose-500 to-purple-600 bg-clip-text text-transparent">
+                  Infinite Possibilities.
+                </span>
+              </h3>
+
+              <p className="text-base leading-8 text-slate-500 sm:text-lg">
+                A comprehensive business management platform that automates
+                and integrates your core business processes. Connect
+                departments, centralize data and make smarter decisions from a
+                single powerful ecosystem.
+              </p>
+
+              <div className="grid gap-3">
+                {[
+                  "Seamless Department Integration",
+                  "Real-time Data Synchronization",
+                  "Scalable Architecture",
+                  "Advanced Analytics & Reporting",
+                ].map((item, idx) => (
+                  <motion.div
+                    key={item}
+                    initial={{ opacity: 0, x: 15 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.08 }}
+                    className="flex items-center gap-3 rounded-xl border border-slate-100 bg-white px-4 py-3 shadow-sm"
+                  >
+                    <FaCheckCircle className="shrink-0 text-emerald-500" />
+                    <span className="font-semibold text-slate-700">
+                      {item}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+
+              <Link
+                to="/erp-feature-section"
+                className="group inline-flex items-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 px-7 py-4 font-bold text-white shadow-xl shadow-blue-500/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+              >
+                Explore ERP
+                <FaArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+            </motion.div>
+          </div>
         </div>
+      </section>
+
+      {/* =====================================================
+          FEATURE CARDS
+      ===================================================== */}
+
+      <section className="bg-white py-24">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {features.map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 35 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ delay: index * 0.08 }}
+                whileHover={{ y: -10 }}
+                className="group relative overflow-hidden rounded-3xl border border-slate-100 bg-white p-7 shadow-lg shadow-slate-200/40 transition-all duration-300 hover:shadow-2xl"
+              >
+                {/* Hover Glow */}
+                <div
+                  className={`absolute -right-12 -top-12 h-32 w-32 rounded-full bg-gradient-to-br ${feature.gradient} opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-30`}
+                />
+
+                {/* Icon */}
+                <div
+                  className={`relative mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${feature.gradient} text-xl text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:rotate-3`}
+                >
+                  {feature.icon}
+                </div>
+
+                <h3 className="relative text-xl font-extrabold text-slate-800 transition-colors group-hover:text-blue-600">
+                  {feature.title}
+                </h3>
+
+                <p className="relative mt-3 leading-7 text-slate-500">
+                  {feature.desc}
+                </p>
+
+                <div className="mt-6 flex items-center gap-2 text-sm font-bold text-blue-600 opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100">
+                  Learn More
+                  <FaArrowRight className="text-xs" />
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================
+          CTA
+      ===================================================== */}
+
+      <section className="relative overflow-hidden bg-slate-950 py-24">
+        {/* Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-indigo-950 to-purple-950" />
+
+        {/* Glows */}
+        <motion.div
+          className="absolute -left-32 top-0 h-96 w-96 rounded-full bg-cyan-500/20 blur-[120px]"
+          animate={{ scale: [1, 1.2, 1] }}
+          transition={{ duration: 7, repeat: Infinity }}
+        />
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          className="absolute -right-32 bottom-0 h-96 w-96 rounded-full bg-fuchsia-500/20 blur-[120px]"
+          animate={{ scale: [1.2, 1, 1.2] }}
+          transition={{ duration: 8, repeat: Infinity }}
+        />
+
+        {/* Pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.06]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, white 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+          }}
+        />
+
+        <motion.div
+          initial={{ opacity: 0, y: 35 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative z-10 max-w-4xl mx-auto text-center px-6"
+          className="relative z-10 mx-auto max-w-4xl px-5 text-center sm:px-6"
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-            Ready to Transform Your Business?
+          <div className="mx-auto mb-7 flex h-16 w-16 items-center justify-center rounded-2xl border border-white/20 bg-white/10 text-2xl text-cyan-300 shadow-xl backdrop-blur-xl">
+            <FaRocket />
+          </div>
+
+          <h2 className="text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl">
+            Ready to Transform
+            <br />
+            <span className="bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent">
+              Your Business?
+            </span>
           </h2>
-          <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
-            Join thousands of satisfied customers who have revolutionized their operations with vTechSoftware ERP.
+
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-blue-100/80 sm:text-lg">
+            Join thousands of businesses using modern technology to automate
+            operations, improve productivity and achieve sustainable growth.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-blue-600 px-10 py-4 rounded-xl font-bold text-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-              <Link to="/book-demo">Book a Free Demo</Link>
-            </button>
-            <button className="bg-transparent border-2 border-white/50 text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-white/10 transition-all duration-300">
-              <Link to="/contact">Contact Sales</Link>
-            </button>
+
+          <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+            <Link
+              to="/book-demo"
+              className="group inline-flex items-center justify-center gap-3 rounded-2xl bg-white px-9 py-4 text-base font-extrabold text-blue-700 shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-white/20 sm:text-lg"
+            >
+              Book a Free Demo
+              <FaArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
+
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center rounded-2xl border border-white/25 bg-white/10 px-9 py-4 text-base font-extrabold text-white backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/20 sm:text-lg"
+            >
+              Contact Sales
+            </Link>
+          </div>
+
+          <div className="mt-9 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm text-blue-100/60">
+            <span className="flex items-center gap-2">
+              <FaCheckCircle className="text-emerald-400" />
+              Free Demo
+            </span>
+
+            <span className="flex items-center gap-2">
+              <FaCheckCircle className="text-emerald-400" />
+              Expert Support
+            </span>
+
+            <span className="flex items-center gap-2">
+              <FaCheckCircle className="text-emerald-400" />
+              Secure Platform
+            </span>
           </div>
         </motion.div>
       </section>
@@ -453,3 +805,4 @@ const CustomerPage = () => {
 };
 
 export default CustomerPage;
+
