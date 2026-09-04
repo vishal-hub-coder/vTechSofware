@@ -441,8 +441,8 @@ const About = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.9 }}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.05] text-white"
-          >
+         className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.08] text-white"
+         >
             Transforming{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-orange-400">
               Businesses
@@ -458,7 +458,7 @@ const About = () => {
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.45, duration: 0.8 }}
-            className="max-w-3xl mx-auto mt-7 text-lg md:text-xl lg:text-2xl text-gray-300 leading-relaxed"
+       className="max-w-3xl mx-auto mt-7 text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed"
           >
             We build intelligent ERP solutions that simplify operations,
             connect teams, and help ambitious businesses grow faster.

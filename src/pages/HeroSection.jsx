@@ -1,8 +1,6 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { motion } from "framer-motion";
 
-import Image1 from "../assets/hero-img.png";
-import BgImage from "../assets/herosection.png";
+import React, { useEffect, useMemo, useState } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import SEO from "../layout/SEO";
 
 const HERO_TEXT = "Empower Your Business with Expert Freelance Talent";
@@ -11,24 +9,9 @@ const HeroSection = () => {
   const [displayText, setDisplayText] = useState("");
   const [index, setIndex] = useState(0);
 
-  // --------------------------------------------------
-  // Stable Floating Particles
-  // --------------------------------------------------
-  const particles = useMemo(() => {
-    return Array.from({ length: 35 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 4 + 1.5,
-      duration: Math.random() * 8 + 8,
-      delay: Math.random() * 5,
-      opacity: Math.random() * 0.5 + 0.2,
-    }));
-  }, []);
-
-  // --------------------------------------------------
-  // Typewriter Effect
-  // --------------------------------------------------
+  // =========================================================
+  // TYPEWRITER
+  // =========================================================
   useEffect(() => {
     let timer;
 
@@ -36,7 +19,7 @@ const HeroSection = () => {
       timer = setTimeout(() => {
         setDisplayText((prev) => prev + HERO_TEXT[index]);
         setIndex((prev) => prev + 1);
-      }, 75);
+      }, 65);
     } else {
       timer = setTimeout(() => {
         setDisplayText("");
@@ -47,6 +30,52 @@ const HeroSection = () => {
     return () => clearTimeout(timer);
   }, [index]);
 
+  // =========================================================
+  // PARTICLES
+  // =========================================================
+  const particles = useMemo(() => {
+    return Array.from({ length: 45 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 3 + 1,
+      duration: Math.random() * 7 + 6,
+      delay: Math.random() * 5,
+      opacity: Math.random() * 0.5 + 0.2,
+    }));
+  }, []);
+
+  // =========================================================
+  // MOUSE PARALLAX
+  // =========================================================
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const smoothX = useSpring(mouseX, {
+    stiffness: 100,
+    damping: 20,
+  });
+
+  const smoothY = useSpring(mouseY, {
+    stiffness: 100,
+    damping: 20,
+  });
+
+  const rotateX = useTransform(smoothY, [-500, 500], [8, -8]);
+  const rotateY = useTransform(smoothX, [-500, 500], [-8, 8]);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+
+    mouseX.set(e.clientX - rect.left - rect.width / 2);
+    mouseY.set(e.clientY - rect.top - rect.height / 2);
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
+
   return (
     <>
       <SEO
@@ -56,55 +85,63 @@ const HeroSection = () => {
       />
 
       <section
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
         className="
           relative
           min-h-screen
+          overflow-hidden
+          bg-[#06040a]
+          text-white
           flex
           items-center
-          justify-center
-          overflow-hidden
-          bg-[#08050b]
-          text-white
         "
-        style={{
-          backgroundImage: `url(${BgImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
       >
         {/* =====================================================
-            BACKGROUND OVERLAY
+            BACKGROUND
         ====================================================== */}
 
-        <div className="absolute inset-0 bg-[#050308]/75" />
+        <div className="absolute inset-0 bg-[#06040a]" />
 
-        <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-purple-950/50 to-orange-950/40" />
+        <div
+          className="
+            absolute
+            inset-0
+            bg-[radial-gradient(circle_at_20%_30%,rgba(139,92,246,0.18),transparent_30%),radial-gradient(circle_at_80%_40%,rgba(245,158,11,0.15),transparent_30%),radial-gradient(circle_at_50%_100%,rgba(124,58,237,0.12),transparent_35%)]
+          "
+        />
 
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(245,158,11,0.13),transparent_35%)]" />
+        <div
+          className="
+            absolute
+            inset-0
+            opacity-[0.035]
+            bg-[linear-gradient(rgba(255,255,255,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.15)_1px,transparent_1px)]
+            bg-[size:60px_60px]
+          "
+        />
 
         {/* =====================================================
-            GOLDEN DIWALI GLOW
+            LARGE GLOWS
         ====================================================== */}
 
         <motion.div
           className="
             absolute
-            -top-32
-            left-1/2
-            -translate-x-1/2
-            w-[650px]
-            h-[650px]
+            -top-40
+            -left-40
+            w-[600px]
+            h-[600px]
             rounded-full
-            bg-orange-500/10
+            bg-purple-600/10
             blur-[150px]
           "
           animate={{
-            scale: [1, 1.15, 1],
-            opacity: [0.4, 0.7, 0.4],
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.6, 0.3],
           }}
           transition={{
-            duration: 7,
+            duration: 8,
             repeat: Infinity,
             ease: "easeInOut",
           }}
@@ -113,17 +150,18 @@ const HeroSection = () => {
         <motion.div
           className="
             absolute
-            bottom-[-200px]
-            left-[-150px]
-            w-[550px]
-            h-[550px]
+            -bottom-40
+            right-[-100px]
+            w-[650px]
+            h-[650px]
             rounded-full
-            bg-yellow-500/10
-            blur-[130px]
+            bg-orange-500/10
+            blur-[160px]
           "
           animate={{
-            scale: [1, 1.2, 1],
-            x: [0, 40, 0],
+            scale: [1, 1.15, 1],
+            x: [0, -30, 0],
+            opacity: [0.3, 0.6, 0.3],
           }}
           transition={{
             duration: 9,
@@ -132,30 +170,8 @@ const HeroSection = () => {
           }}
         />
 
-        <motion.div
-          className="
-            absolute
-            top-[20%]
-            right-[-150px]
-            w-[500px]
-            h-[500px]
-            rounded-full
-            bg-purple-600/20
-            blur-[140px]
-          "
-          animate={{
-            scale: [1, 1.25, 1],
-            y: [0, -30, 0],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-
         {/* =====================================================
-            DIWALI SPARKLES / PARTICLES
+            PARTICLES
         ====================================================== */}
 
         <div className="absolute inset-0 pointer-events-none">
@@ -166,7 +182,7 @@ const HeroSection = () => {
                 absolute
                 rounded-full
                 bg-yellow-300
-                shadow-[0_0_10px_rgba(250,204,21,0.8)]
+                shadow-[0_0_12px_rgba(250,204,21,0.8)]
               "
               style={{
                 left: `${particle.x}%`,
@@ -175,7 +191,7 @@ const HeroSection = () => {
                 height: particle.size,
               }}
               animate={{
-                y: [0, -35, 0],
+                y: [0, -30, 0],
                 opacity: [
                   particle.opacity,
                   1,
@@ -194,192 +210,6 @@ const HeroSection = () => {
         </div>
 
         {/* =====================================================
-            DIWALI FLOATING DIYAS
-        ====================================================== */}
-
-        <motion.div
-          className="
-            absolute
-            top-28
-            left-[7%]
-            hidden
-            lg:block
-          "
-          animate={{
-            y: [0, -12, 0],
-            rotate: [-2, 2, -2],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        >
-          <div className="relative">
-            {/* Flame */}
-            <motion.div
-              className="
-                absolute
-                -top-8
-                left-1/2
-                -translate-x-1/2
-                w-5
-                h-8
-                rounded-[50%]
-                bg-gradient-to-t
-                from-orange-600
-                via-yellow-300
-                to-white
-                blur-[1px]
-                shadow-[0_0_30px_rgba(251,191,36,1)]
-              "
-              animate={{
-                scale: [1, 1.15, 0.9, 1],
-                rotate: [-3, 4, -2, 0],
-              }}
-              transition={{
-                duration: 0.8,
-                repeat: Infinity,
-              }}
-            />
-
-            {/* Diya */}
-            <div
-              className="
-                w-20
-                h-8
-                rounded-b-full
-                bg-gradient-to-b
-                from-yellow-500
-                via-orange-500
-                to-orange-800
-                shadow-[0_10px_35px_rgba(249,115,22,0.55)]
-              "
-            />
-
-            <div className="absolute top-1 left-2 right-2 h-2 rounded-full bg-yellow-200/50 blur-sm" />
-          </div>
-        </motion.div>
-
-        <motion.div
-          className="
-            absolute
-            bottom-32
-            right-[7%]
-            hidden
-            lg:block
-          "
-          animate={{
-            y: [0, 12, 0],
-            rotate: [2, -2, 2],
-          }}
-          transition={{
-            duration: 4.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        >
-          <div className="relative">
-            <motion.div
-              className="
-                absolute
-                -top-8
-                left-1/2
-                -translate-x-1/2
-                w-5
-                h-8
-                rounded-[50%]
-                bg-gradient-to-t
-                from-orange-600
-                via-yellow-300
-                to-white
-                shadow-[0_0_30px_rgba(251,191,36,1)]
-              "
-              animate={{
-                scale: [1, 0.9, 1.15, 1],
-              }}
-              transition={{
-                duration: 0.7,
-                repeat: Infinity,
-              }}
-            />
-
-            <div
-              className="
-                w-20
-                h-8
-                rounded-b-full
-                bg-gradient-to-b
-                from-yellow-500
-                via-orange-500
-                to-orange-800
-                shadow-[0_10px_35px_rgba(249,115,22,0.55)]
-              "
-            />
-          </div>
-        </motion.div>
-
-        {/* =====================================================
-            DECORATIVE RINGS
-        ====================================================== */}
-
-        <motion.div
-          className="
-            absolute
-            top-[12%]
-            right-[12%]
-            w-28
-            h-28
-            rounded-full
-            border
-            border-yellow-400/20
-          "
-          animate={{
-            rotate: 360,
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            rotate: {
-              duration: 18,
-              repeat: Infinity,
-              ease: "linear",
-            },
-            scale: {
-              duration: 5,
-              repeat: Infinity,
-            },
-          }}
-        />
-
-        <motion.div
-          className="
-            absolute
-            bottom-[15%]
-            left-[10%]
-            w-20
-            h-20
-            rounded-full
-            border
-            border-orange-400/20
-          "
-          animate={{
-            rotate: -360,
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            rotate: {
-              duration: 15,
-              repeat: Infinity,
-              ease: "linear",
-            },
-            scale: {
-              duration: 4,
-              repeat: Infinity,
-            },
-          }}
-        />
-
-        {/* =====================================================
             MAIN CONTAINER
         ====================================================== */}
 
@@ -394,20 +224,19 @@ const HeroSection = () => {
             sm:px-8
             lg:px-10
             py-28
-            lg:py-24
           "
         >
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-10 items-center">
+          <div className="grid lg:grid-cols-2 gap-14 lg:gap-8 items-center">
 
             {/* =================================================
-                LEFT CONTENT
-            ================================================== */}
+                LEFT SIDE
+            ================================================= */}
 
             <motion.div
               className="text-center lg:text-left"
               initial={{
                 opacity: 0,
-                x: -60,
+                x: -70,
               }}
               animate={{
                 opacity: 1,
@@ -419,7 +248,7 @@ const HeroSection = () => {
               }}
             >
 
-              {/* Diwali Badge */}
+              {/* BADGE */}
 
               <motion.div
                 className="
@@ -430,10 +259,10 @@ const HeroSection = () => {
                   py-2.5
                   rounded-full
                   border
-                  border-yellow-400/30
-                  bg-yellow-400/10
+                  border-yellow-400/20
+                  bg-yellow-400/[0.07]
                   backdrop-blur-xl
-                  shadow-[0_0_30px_rgba(250,204,21,0.08)]
+                  shadow-[0_0_35px_rgba(250,204,21,0.08)]
                   mb-7
                 "
                 initial={{
@@ -450,35 +279,32 @@ const HeroSection = () => {
                 }}
               >
                 <motion.span
-                  className="
-                    text-xl
-                    drop-shadow-[0_0_10px_rgba(250,204,21,0.8)]
-                  "
                   animate={{
+                    rotate: [-8, 8, -8],
                     scale: [1, 1.2, 1],
-                    rotate: [-5, 5, -5],
                   }}
                   transition={{
                     duration: 1.5,
                     repeat: Infinity,
                   }}
+                  className="text-xl"
                 >
-                  🪔
+                  ✨
                 </motion.span>
 
                 <span className="text-sm sm:text-base font-medium text-yellow-200">
-                  Diwali Special • Light Up Your Business
+                  Build • Connect • Grow
                 </span>
 
-                <span className="h-2 w-2 rounded-full bg-green-400 animate-pulse shadow-[0_0_10px_rgba(74,222,128,1)]" />
+                <span className="w-2 h-2 rounded-full bg-green-400 shadow-[0_0_12px_rgba(74,222,128,1)] animate-pulse" />
               </motion.div>
 
-              {/* Heading */}
+              {/* HEADING */}
 
               <motion.div
                 initial={{
                   opacity: 0,
-                  y: 25,
+                  y: 30,
                 }}
                 animate={{
                   opacity: 1,
@@ -491,49 +317,47 @@ const HeroSection = () => {
               >
                 <h1
                   className="
-                    text-4xl
-                    sm:text-5xl
-                    lg:text-6xl
-                    xl:text-[4.3rem]
+                 text-3xl
+sm:text-2xl
+lg:text-2xl
+xl:text-[1.5rem]
                     font-black
-                    leading-[1.05]
+                    leading-[1.04]
                     tracking-tight
                   "
                 >
-                  <span className="block text-white">
+                  <span className="text-white">
                     {displayText}
                   </span>
 
                   <span
                     className="
                       inline-block
-                      h-[1em]
-                      w-[3px]
                       ml-2
+                      w-[3px]
+                      h-[0.95em]
                       align-middle
                       bg-gradient-to-b
                       from-yellow-300
                       to-orange-500
-                      shadow-[0_0_12px_rgba(250,204,21,0.8)]
+                      shadow-[0_0_15px_rgba(250,204,21,0.9)]
                       animate-pulse
                     "
                   />
                 </h1>
 
-                {/* Golden Accent */}
-
                 <div className="mt-5 flex items-center justify-center lg:justify-start gap-3">
-                  <div className="h-[2px] w-16 bg-gradient-to-r from-transparent to-yellow-400" />
+                  <div className="h-[2px] w-14 bg-gradient-to-r from-transparent to-yellow-400" />
 
-                  <span className="text-yellow-400 text-sm">
+                  <span className="text-yellow-400">
                     ✦
                   </span>
 
-                  <div className="h-[2px] w-16 bg-gradient-to-l from-transparent to-yellow-400" />
+                  <div className="h-[2px] w-14 bg-gradient-to-l from-transparent to-yellow-400" />
                 </div>
               </motion.div>
 
-              {/* Description */}
+              {/* DESCRIPTION */}
 
               <motion.p
                 className="
@@ -560,13 +384,12 @@ const HeroSection = () => {
                   duration: 0.7,
                 }}
               >
-                Connect with skilled freelancers worldwide and turn
-                your ideas into reality. From web development and
-                UI/UX design to digital marketing, find the right
-                talent to grow your business faster.
+                Connect with skilled freelancers, discover
+                exceptional talent, and transform your ideas
+                into powerful digital experiences.
               </motion.p>
 
-              {/* CTA Buttons */}
+              {/* BUTTONS */}
 
               <motion.div
                 className="
@@ -592,10 +415,17 @@ const HeroSection = () => {
                 }}
               >
 
-                {/* Primary */}
+                {/* PRIMARY */}
 
                 <motion.button
                   type="button"
+                  whileHover={{
+                    scale: 1.05,
+                    y: -4,
+                  }}
+                  whileTap={{
+                    scale: 0.97,
+                  }}
                   className="
                     group
                     relative
@@ -609,24 +439,23 @@ const HeroSection = () => {
                     from-yellow-300
                     via-amber-400
                     to-orange-500
-                    shadow-[0_10px_40px_rgba(245,158,11,0.25)]
-                    transition-all
+                    shadow-[0_15px_45px_rgba(245,158,11,0.25)]
                   "
-                  whileHover={{
-                    scale: 1.05,
-                    y: -3,
-                    boxShadow:
-                      "0 20px 50px rgba(245,158,11,0.4)",
-                  }}
-                  whileTap={{
-                    scale: 0.97,
-                  }}
                 >
                   <span className="relative z-10 flex items-center justify-center gap-2">
                     Find Freelancers
-                    <span className="text-lg transition-transform group-hover:translate-x-1">
+
+                    <motion.span
+                      animate={{
+                        x: [0, 5, 0],
+                      }}
+                      transition={{
+                        duration: 1.2,
+                        repeat: Infinity,
+                      }}
+                    >
                       →
-                    </span>
+                    </motion.span>
                   </span>
 
                   <span
@@ -634,7 +463,7 @@ const HeroSection = () => {
                       absolute
                       inset-0
                       bg-white/30
-                      translate-x-[-120%]
+                      -translate-x-[120%]
                       skew-x-[-20deg]
                       group-hover:translate-x-[120%]
                       transition-transform
@@ -643,50 +472,50 @@ const HeroSection = () => {
                   />
                 </motion.button>
 
-                {/* Secondary */}
+                {/* SECONDARY */}
 
                 <motion.button
                   type="button"
+                  whileHover={{
+                    scale: 1.04,
+                    y: -4,
+                  }}
+                  whileTap={{
+                    scale: 0.97,
+                  }}
                   className="
-                    group
                     px-8
                     py-4
                     rounded-2xl
                     font-semibold
                     text-white
                     border
-                    border-white/20
-                    bg-white/[0.07]
+                    border-white/15
+                    bg-white/[0.06]
                     backdrop-blur-xl
-                    hover:bg-white/[0.12]
-                    hover:border-yellow-400/40
+                    hover:bg-white/[0.1]
+                    hover:border-yellow-400/30
                     transition-all
                   "
-                  whileHover={{
-                    scale: 1.04,
-                    y: -3,
-                  }}
-                  whileTap={{
-                    scale: 0.97,
-                  }}
                 >
                   <span className="flex items-center justify-center gap-2">
                     Post a Project
-                    <span className="text-yellow-400 transition-transform group-hover:translate-x-1">
+
+                    <span className="text-yellow-400">
                       ↗
                     </span>
                   </span>
                 </motion.button>
+
               </motion.div>
 
-              {/* Trust */}
+              {/* TRUST */}
 
               <motion.div
                 className="
                   mt-8
                   flex
                   flex-wrap
-                  items-center
                   justify-center
                   lg:justify-start
                   gap-x-6
@@ -702,7 +531,6 @@ const HeroSection = () => {
                 }}
                 transition={{
                   delay: 0.9,
-                  duration: 0.7,
                 }}
               >
                 <span className="flex items-center gap-2">
@@ -721,7 +549,7 @@ const HeroSection = () => {
                 </span>
               </motion.div>
 
-              {/* Stats */}
+              {/* STATS */}
 
               <motion.div
                 className="
@@ -734,7 +562,7 @@ const HeroSection = () => {
                   rounded-2xl
                   border
                   border-white/10
-                  bg-white/[0.045]
+                  bg-white/[0.04]
                   backdrop-blur-xl
                   overflow-hidden
                 "
@@ -752,30 +580,17 @@ const HeroSection = () => {
                 }}
               >
                 {[
-                  {
-                    number: "10K+",
-                    label: "Freelancers",
-                  },
-                  {
-                    number: "5K+",
-                    label: "Projects",
-                  },
-                  {
-                    number: "98%",
-                    label: "Satisfaction",
-                  },
-                ].map((stat, index) => (
+                  ["10K+", "Freelancers"],
+                  ["5K+", "Projects"],
+                  ["98%", "Satisfaction"],
+                ].map(([number, label], i) => (
                   <div
-                    key={stat.label}
+                    key={label}
                     className={`
                       py-5
                       px-3
                       text-center
-                      ${
-                        index !== 2
-                          ? "border-r border-white/10"
-                          : ""
-                      }
+                      ${i !== 2 ? "border-r border-white/10" : ""}
                     `}
                   >
                     <div
@@ -790,11 +605,11 @@ const HeroSection = () => {
                         text-transparent
                       "
                     >
-                      {stat.number}
+                      {number}
                     </div>
 
                     <div className="mt-1 text-xs sm:text-sm text-gray-400">
-                      {stat.label}
+                      {label}
                     </div>
                   </div>
                 ))}
@@ -802,57 +617,58 @@ const HeroSection = () => {
             </motion.div>
 
             {/* =================================================
-                RIGHT IMAGE
-            ================================================== */}
+                RIGHT SIDE - NEW PREMIUM VISUAL
+            ================================================= */}
 
             <motion.div
               className="
                 relative
+                min-h-[480px]
+                lg:min-h-[620px]
                 flex
                 items-center
                 justify-center
-                min-h-[420px]
-                lg:min-h-[600px]
+                perspective-[1200px]
               "
               initial={{
                 opacity: 0,
-                scale: 0.8,
-                x: 50,
+                x: 70,
+                scale: 0.85,
               }}
               animate={{
                 opacity: 1,
-                scale: 1,
                 x: 0,
+                scale: 1,
               }}
               transition={{
                 delay: 0.35,
-                duration: 1.1,
+                duration: 1.2,
                 type: "spring",
-                stiffness: 80,
+                stiffness: 70,
               }}
             >
 
-              {/* Outer Glow */}
+              {/* MAIN GLOW */}
 
               <motion.div
                 className="
                   absolute
-                  w-[320px]
-                  h-[320px]
+                  w-[300px]
+                  h-[300px]
                   sm:w-[430px]
                   sm:h-[430px]
-                  lg:w-[540px]
-                  lg:h-[540px]
+                  lg:w-[520px]
+                  lg:h-[520px]
                   rounded-full
                   bg-gradient-to-r
-                  from-yellow-500/20
-                  via-orange-500/10
-                  to-purple-600/20
-                  blur-[80px]
+                  from-purple-600/20
+                  via-yellow-500/10
+                  to-orange-500/20
+                  blur-[90px]
                 "
                 animate={{
                   scale: [1, 1.15, 1],
-                  opacity: [0.5, 0.8, 0.5],
+                  opacity: [0.45, 0.75, 0.45],
                 }}
                 transition={{
                   duration: 5,
@@ -861,7 +677,7 @@ const HeroSection = () => {
                 }}
               />
 
-              {/* Rotating Golden Ring */}
+              {/* ORBIT 1 */}
 
               <motion.div
                 className="
@@ -870,8 +686,8 @@ const HeroSection = () => {
                   h-[300px]
                   sm:w-[400px]
                   sm:h-[400px]
-                  lg:w-[510px]
-                  lg:h-[510px]
+                  lg:w-[500px]
+                  lg:h-[500px]
                   rounded-full
                   border
                   border-yellow-400/15
@@ -881,26 +697,39 @@ const HeroSection = () => {
                   rotate: 360,
                 }}
                 transition={{
-                  duration: 25,
+                  duration: 24,
                   repeat: Infinity,
                   ease: "linear",
                 }}
-              />
+              >
+                <span
+                  className="
+                    absolute
+                    -top-2
+                    left-1/2
+                    w-4
+                    h-4
+                    rounded-full
+                    bg-yellow-300
+                    shadow-[0_0_25px_rgba(250,204,21,1)]
+                  "
+                />
+              </motion.div>
 
-              {/* Inner Ring */}
+              {/* ORBIT 2 */}
 
               <motion.div
                 className="
                   absolute
-                  w-[240px]
-                  h-[240px]
+                  w-[230px]
+                  h-[230px]
                   sm:w-[320px]
                   sm:h-[320px]
-                  lg:w-[420px]
-                  lg:h-[420px]
+                  lg:w-[410px]
+                  lg:h-[410px]
                   rounded-full
                   border
-                  border-orange-400/10
+                  border-purple-400/20
                 "
                 animate={{
                   rotate: -360,
@@ -910,63 +739,341 @@ const HeroSection = () => {
                   repeat: Infinity,
                   ease: "linear",
                 }}
-              />
+              >
+                <span
+                  className="
+                    absolute
+                    bottom-5
+                    right-5
+                    w-3
+                    h-3
+                    rounded-full
+                    bg-purple-300
+                    shadow-[0_0_20px_rgba(192,132,252,1)]
+                  "
+                />
+              </motion.div>
 
-              {/* Image */}
+              {/* =================================================
+                  CENTRAL DASHBOARD
+              ================================================= */}
 
-              <motion.img
-                src={Image1}
-                alt="vTechSoftware freelance business platform"
+              <motion.div
+                style={{
+                  rotateX,
+                  rotateY,
+                }}
+                animate={{
+                  y: [0, -10, 0],
+                }}
+                transition={{
+                  y: {
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  },
+                }}
                 className="
                   relative
                   z-10
-                  w-full
-                  max-w-[280px]
-                  sm:max-w-[370px]
-                  lg:max-w-[500px]
-                  object-contain
-                  drop-shadow-[0_25px_60px_rgba(0,0,0,0.65)]
+                  w-[290px]
+                  sm:w-[370px]
+                  lg:w-[470px]
+                  rounded-[28px]
+                  border
+                  border-white/15
+                  bg-[#100b18]/90
+                  backdrop-blur-2xl
+                  shadow-[0_35px_100px_rgba(0,0,0,0.65)]
+                  p-5
+                  sm:p-6
                 "
-                animate={{
-                  y: [0, -12, 0],
-                }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                whileHover={{
-                  scale: 1.04,
-                  rotate: 1,
-                }}
-              />
+              >
+
+                {/* TOP BAR */}
+
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="
+                        w-10
+                        h-10
+                        rounded-xl
+                        bg-gradient-to-br
+                        from-yellow-300
+                        to-orange-500
+                        flex
+                        items-center
+                        justify-center
+                        text-black
+                        font-black
+                        shadow-[0_0_25px_rgba(245,158,11,0.3)]
+                      "
+                    >
+                      V
+                    </div>
+
+                    <div>
+                      <div className="text-sm font-bold text-white">
+                        vTech Workspace
+                      </div>
+
+                      <div className="text-[11px] text-gray-500">
+                        Freelance Platform
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-red-400" />
+                    <span className="w-2 h-2 rounded-full bg-yellow-400" />
+                    <span className="w-2 h-2 rounded-full bg-green-400" />
+                  </div>
+                </div>
+
+                {/* DASHBOARD HEADER */}
+
+                <div
+                  className="
+                    rounded-2xl
+                    border
+                    border-white/10
+                    bg-gradient-to-br
+                    from-white/[0.08]
+                    to-white/[0.02]
+                    p-5
+                  "
+                >
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <div className="text-xs text-gray-500">
+                        Project Growth
+                      </div>
+
+                      <div className="mt-1 text-3xl font-black text-white">
+                        +84.6%
+                      </div>
+                    </div>
+
+                    <div
+                      className="
+                        px-3
+                        py-1
+                        rounded-full
+                        text-xs
+                        font-semibold
+                        text-green-300
+                        bg-green-400/10
+                        border
+                        border-green-400/20
+                      "
+                    >
+                      ↑ 24.8%
+                    </div>
+                  </div>
+
+                  {/* GRAPH */}
+
+                  <div className="mt-6 flex items-end gap-2 h-24">
+                    {[35, 48, 42, 62, 54, 76, 67, 88, 72, 96].map(
+                      (height, i) => (
+                        <motion.div
+                          key={i}
+                          className="
+                            flex-1
+                            rounded-t-lg
+                            bg-gradient-to-t
+                            from-purple-600
+                            via-yellow-500
+                            to-yellow-300
+                          "
+                          initial={{
+                            height: 0,
+                          }}
+                          animate={{
+                            height: `${height}%`,
+                          }}
+                          transition={{
+                            delay: 1 + i * 0.08,
+                            duration: 0.8,
+                            ease: "easeOut",
+                          }}
+                        />
+                      )
+                    )}
+                  </div>
+                </div>
+
+                {/* CARDS */}
+
+                <div className="grid grid-cols-2 gap-3 mt-4">
+
+                  <motion.div
+                    whileHover={{
+                      y: -4,
+                    }}
+                    className="
+                      rounded-2xl
+                      border
+                      border-white/10
+                      bg-white/[0.04]
+                      p-4
+                    "
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-gray-500">
+                        Active Projects
+                      </span>
+
+                      <span className="text-purple-400">
+                        ◈
+                      </span>
+                    </div>
+
+                    <div className="mt-2 text-2xl font-black">
+                      128
+                    </div>
+
+                    <div className="mt-1 text-[11px] text-green-400">
+                      +18 this week
+                    </div>
+                  </motion.div>
+
+                  <motion.div
+                    whileHover={{
+                      y: -4,
+                    }}
+                    className="
+                      rounded-2xl
+                      border
+                      border-white/10
+                      bg-white/[0.04]
+                      p-4
+                    "
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-gray-500">
+                        Talent Online
+                      </span>
+
+                      <span className="text-green-400">
+                        ●
+                      </span>
+                    </div>
+
+                    <div className="mt-2 text-2xl font-black">
+                      2.4K
+                    </div>
+
+                    <div className="mt-1 text-[11px] text-gray-500">
+                      Available now
+                    </div>
+                  </motion.div>
+
+                </div>
+
+                {/* FREELANCERS */}
+
+                <div className="mt-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-xs font-semibold text-gray-400">
+                      Top Freelancers
+                    </span>
+
+                    <span className="text-[11px] text-yellow-400">
+                      View all →
+                    </span>
+                  </div>
+
+                  <div className="flex -space-x-2">
+                    {[
+                      "👨🏻‍💻",
+                      "👩🏻‍🎨",
+                      "👨🏽‍🚀",
+                      "👩🏽‍💻",
+                      "👨🏻‍🎨",
+                    ].map((avatar, i) => (
+                      <motion.div
+                        key={i}
+                        className="
+                          w-10
+                          h-10
+                          rounded-full
+                          border-2
+                          border-[#100b18]
+                          bg-gradient-to-br
+                          from-purple-500/40
+                          to-yellow-500/30
+                          flex
+                          items-center
+                          justify-center
+                          text-lg
+                        "
+                        initial={{
+                          opacity: 0,
+                          scale: 0,
+                        }}
+                        animate={{
+                          opacity: 1,
+                          scale: 1,
+                        }}
+                        transition={{
+                          delay: 1.2 + i * 0.1,
+                          type: "spring",
+                        }}
+                      >
+                        {avatar}
+                      </motion.div>
+                    ))}
+
+                    <div
+                      className="
+                        w-10
+                        h-10
+                        rounded-full
+                        border-2
+                        border-[#100b18]
+                        bg-white/10
+                        flex
+                        items-center
+                        justify-center
+                        text-xs
+                        font-bold
+                      "
+                    >
+                      +99
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
 
               {/* =================================================
-                  VERIFIED CARD
-              ================================================== */}
+                  FLOATING CARD - VERIFIED
+              ================================================= */}
 
               <motion.div
                 className="
                   absolute
                   z-20
                   left-0
-                  bottom-4
-                  sm:left-0
-                  lg:left-[-15px]
+                  sm:left-[-15px]
+                  lg:left-[-25px]
+                  bottom-12
                   px-4
                   py-3
                   rounded-2xl
                   border
                   border-white/15
-                  bg-black/45
+                  bg-black/55
                   backdrop-blur-xl
                   shadow-2xl
                 "
                 animate={{
-                  y: [0, -10, 0],
+                  y: [0, -12, 0],
+                  rotate: [-1, 1, -1],
                 }}
                 transition={{
-                  duration: 3.5,
+                  duration: 4,
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
@@ -974,60 +1081,60 @@ const HeroSection = () => {
                 <div className="flex items-center gap-3">
                   <div
                     className="
-                      flex
-                      items-center
-                      justify-center
                       w-10
                       h-10
                       rounded-xl
-                      bg-green-500/10
+                      bg-green-400/10
                       border
                       border-green-400/20
+                      flex
+                      items-center
+                      justify-center
+                      text-green-400
                     "
                   >
-                    <span className="text-green-400 text-lg">
-                      ✓
-                    </span>
+                    ✓
                   </div>
 
                   <div>
-                    <div className="text-sm font-bold text-white">
-                      Top Rated
+                    <div className="text-sm font-bold">
+                      Verified Talent
                     </div>
 
-                    <div className="text-xs text-gray-400">
-                      Verified Freelancers
+                    <div className="text-xs text-gray-500">
+                      Expert developers
                     </div>
                   </div>
                 </div>
               </motion.div>
 
               {/* =================================================
-                  UPTIME CARD
-              ================================================== */}
+                  FLOATING CARD - PAYMENT
+              ================================================= */}
 
               <motion.div
                 className="
                   absolute
                   z-20
-                  top-5
+                  top-8
                   right-0
-                  sm:right-0
-                  lg:right-[-15px]
+                  sm:right-[-10px]
+                  lg:right-[-20px]
                   px-4
                   py-3
                   rounded-2xl
                   border
                   border-white/15
-                  bg-black/45
+                  bg-black/55
                   backdrop-blur-xl
                   shadow-2xl
                 "
                 animate={{
-                  y: [0, 10, 0],
+                  y: [0, 12, 0],
+                  rotate: [1, -1, 1],
                 }}
                 transition={{
-                  duration: 4,
+                  duration: 4.5,
                   repeat: Infinity,
                   ease: "easeInOut",
                   delay: 0.5,
@@ -1036,54 +1143,53 @@ const HeroSection = () => {
                 <div className="flex items-center gap-3">
                   <div
                     className="
-                      flex
-                      items-center
-                      justify-center
                       w-10
                       h-10
                       rounded-xl
-                      bg-yellow-500/10
+                      bg-yellow-400/10
                       border
                       border-yellow-400/20
+                      flex
+                      items-center
+                      justify-center
+                      text-yellow-400
                     "
                   >
-                    <span className="text-yellow-400 text-lg">
-                      ⚡
-                    </span>
+                    $
                   </div>
 
                   <div>
-                    <div className="text-sm font-bold text-white">
-                      99.9%
+                    <div className="text-sm font-bold">
+                      Secure Payment
                     </div>
 
-                    <div className="text-xs text-gray-400">
-                      Platform Uptime
+                    <div className="text-xs text-gray-500">
+                      Protected transactions
                     </div>
                   </div>
                 </div>
               </motion.div>
 
               {/* =================================================
-                  SMALL FLOATING BADGE
-              ================================================== */}
+                  FLOATING RATING
+              ================================================= */}
 
               <motion.div
                 className="
                   absolute
                   z-20
-                  top-[38%]
+                  top-[43%]
                   right-[-10px]
                   hidden
                   sm:flex
                   items-center
                   gap-2
-                  px-3
+                  px-4
                   py-2
                   rounded-full
                   border
                   border-yellow-400/20
-                  bg-yellow-400/10
+                  bg-yellow-400/[0.08]
                   backdrop-blur-xl
                 "
                 animate={{
@@ -1103,6 +1209,71 @@ const HeroSection = () => {
                   5.0 Rating
                 </span>
               </motion.div>
+
+              {/* =================================================
+                  MINI FLOATING ICONS
+              ================================================= */}
+
+              <motion.div
+                className="
+                  absolute
+                  top-[22%]
+                  left-[5%]
+                  w-12
+                  h-12
+                  rounded-2xl
+                  bg-purple-500/10
+                  border
+                  border-purple-400/20
+                  backdrop-blur-xl
+                  flex
+                  items-center
+                  justify-center
+                  text-purple-300
+                  text-xl
+                "
+                animate={{
+                  y: [0, -15, 0],
+                  rotate: [0, 8, 0],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                }}
+              >
+                &lt;/&gt;
+              </motion.div>
+
+              <motion.div
+                className="
+                  absolute
+                  bottom-[20%]
+                  right-[8%]
+                  w-12
+                  h-12
+                  rounded-2xl
+                  bg-orange-500/10
+                  border
+                  border-orange-400/20
+                  backdrop-blur-xl
+                  flex
+                  items-center
+                  justify-center
+                  text-orange-300
+                  text-xl
+                "
+                animate={{
+                  y: [0, 15, 0],
+                  rotate: [0, -8, 0],
+                }}
+                transition={{
+                  duration: 4.5,
+                  repeat: Infinity,
+                }}
+              >
+                ⚡
+              </motion.div>
+
             </motion.div>
           </div>
         </div>
@@ -1117,46 +1288,51 @@ const HeroSection = () => {
             bottom-0
             left-0
             right-0
-            h-40
+            h-32
             bg-gradient-to-t
-            from-[#08050b]
-            via-[#08050b]/60
+            from-[#06040a]
             to-transparent
             pointer-events-none
           "
         />
 
         {/* =====================================================
-            BOTTOM DIWALI DECORATION
+            SCROLL INDICATOR
         ====================================================== */}
 
-        <div
+        <motion.div
           className="
             absolute
-            bottom-3
+            bottom-7
             left-1/2
             -translate-x-1/2
-            flex
+            hidden
+            md:flex
+            flex-col
             items-center
-            gap-3
-            opacity-50
+            gap-2
+            text-gray-500
           "
+          animate={{
+            y: [0, 7, 0],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+          }}
         >
-          <span className="text-yellow-500/70">✦</span>
-
-          <span className="w-16 h-px bg-gradient-to-r from-transparent via-yellow-400/50 to-transparent" />
-
-          <span className="text-orange-400/80 text-lg">
-            🪔
+          <span className="text-[10px] uppercase tracking-[0.3em]">
+            Explore
           </span>
 
-          <span className="w-16 h-px bg-gradient-to-r from-transparent via-yellow-400/50 to-transparent" />
-
-          <span className="text-yellow-500/70">✦</span>
-        </div>
+          <span className="text-yellow-400">
+            ↓
+          </span>
+        </motion.div>
       </section>
     </>
   );
 };
 
 export default HeroSection;
+
